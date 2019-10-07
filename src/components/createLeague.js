@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import api from "../api/index";
 
 const inputSty = {
   outline: "none",
@@ -55,14 +56,83 @@ const formBg = {
 
 class CreateLeague extends Component {
   state = {
-    sports: [
-      { name: "Futbol", icona: "faFutbol" },
-      { name: "Softball", icona: "faFutbol" },
-      { name: "Beisbol", icona: "faFutbol" },
-      { name: "Baloncesto", icona: "faFutbol" },
-      { name: "Flag-Footbal", icona: "faFutbol" },
-      { name: "Natacion", icona: "faFutbol" }
-    ]
+    deportes: [],
+    ligas: [],
+    deporte: "",
+    nombreLiga: "",
+    descripcion: "",
+    organizador: {
+      nombre: "",
+      apellido: "",
+      cedula: "",
+      fechaDeNac: "",
+      telefono: "",
+      direccion: ""
+    },
+
+    fechaCreada: ""
+  };
+
+  componentDidMount() {
+    api
+      .getSports()
+      .then(res => {
+        console.log({
+          mensaje: "Get exitoso",
+          response: res.data
+        });
+        this.setState({
+          deportes: res.data
+        });
+      })
+      .catch(err => {
+        console.log({
+          mensaje: "Get Fallido",
+          response: err.data
+        });
+      });
+  }
+
+  sendFormData = () => {
+    console.log("inside sendFormData()");
+    console.log(this.state);
+    api
+      .postLigas(this.state)
+      .then(res => {
+        console.log({
+          mensaje: "Post exitoso",
+          response: res.data
+        });
+      })
+      .catch(err => {
+        console.log({
+          mensaje: "Post Fallido",
+          response: err.data
+        });
+      });
+  };
+
+  inputChange = e => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name);
+    console.log(value);
+    this.setState({ [name]: value });
+  };
+  inputChangeB = e => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name);
+    console.log(value);
+
+    this.setState(prevState => {
+      let organizador = Object.assign({}, prevState.organizador); // creating copy of state variable organizador
+      organizador[name] = value; // update the name property, assign a new value
+      return { organizador }; // return new object organizador object
+    });
+    console.log(this.state);
   };
 
   renderSports = () => {
@@ -72,92 +142,39 @@ class CreateLeague extends Component {
     return listSports;
   };
 
+  renderDeportes = () => {
+    const listDeportes = this.state.deportes.map((items, i) => {
+      return <option key={i}>{items.nombre}</option>;
+    });
+    return listDeportes;
+  };
+
+  calculateAge = e => {
+    console.log("calculateAge()");
+    console.log(e.target.value);
+    this.setState({ fechaDeNac: e.target.value });
+  };
+
+  getCurrentDate = () => {
+    let separator = "-";
+    let newDate = new Date();
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    let hour = newDate.getHours();
+    let minutes = newDate.getMinutes();
+    let seconds = newDate.getSeconds();
+
+    return `${year}${separator}${
+      month < 10 ? `0${month}` : `${month}`
+    }${separator}${date} ${hour}:${minutes}:${seconds}`;
+  };
+
   render() {
     return (
       <React.Fragment>
         <div className="container col-md-8 mt-6" style={standardBg}>
-          <h1>Crear liga</h1>
           <Form style={formBg}>
-            <div className="mt-4">
-              <h3 style={labelNameSty}>Datos Personales</h3>
-              <hr></hr>
-            </div>
-            <FormGroup>
-              <Label style={labelSty} for="exampleEmail">
-                Email
-              </Label>
-              <Input
-                style={inputSty}
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="correo electronico"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label style={labelSty} for="exampleName">
-                Nombre
-              </Label>
-              <Input
-                style={inputSty}
-                style={inputSty}
-                type="name"
-                name="name"
-                id="examplename"
-                placeholder="name"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label style={labelSty} for="exampleFechaNac">
-                Fecha de Nacimiento
-              </Label>
-              <Input
-                style={inputSty}
-                type="date"
-                name="FechaNac"
-                id="exampleFechaNac"
-                placeholder="Fecha de nacimiento"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label style={labelSty} for="exampleId">
-                Cedula
-              </Label>
-              <Input
-                style={inputSty}
-                type="number"
-                name="idCard"
-                id="exampleidCard"
-                placeholder="Cedula"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label style={labelSty} for="exampleText">
-                Text Area
-              </Label>
-              <Input
-                style={inputSty}
-                type="textarea"
-                name="text"
-                id="exampleText"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label style={labelSty} for="exampleFile">
-                File
-              </Label>
-              <Input
-                style={inputSty}
-                type="file"
-                name="file"
-                id="exampleFile"
-              />
-              <FormText color="muted">
-                This is some placeholder block-level help text for the above
-                input. It's a bit lighter and easily wraps to a new line.
-              </FormText>
-            </FormGroup>
-
             <div className="mt-4">
               <h3 style={labelNameSty}>Datos de la liga</h3>
               <hr></hr>
@@ -169,31 +186,122 @@ class CreateLeague extends Component {
               <Input
                 style={inputSty}
                 type="select"
-                name="select"
+                name="deporte"
                 id="exampleSelect"
               >
-                {this.renderSports()}
+                {this.renderDeportes()}
               </Input>
             </FormGroup>
             <FormGroup>
-              <Label style={labelSty} for="exampleSelect">
-                Numero de equipos
+              <Label style={labelSty} for="exampleName">
+                Nombre de la liga
               </Label>
               <Input
+                onChange={event => this.inputChange(event)}
+                style={inputSty}
+                type="name"
+                name="nombreLiga"
+                placeholder="Nombre"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleText">
+                Descripcion de la liga
+              </Label>
+              <Input
+                onChange={event => this.inputChange(event)}
+                style={inputSty}
+                type="textarea"
+                name="descripcion"
+                id="exampleText"
+                rows="1"
+              />
+            </FormGroup>
+            <div className="mt-4">
+              <h3 style={labelNameSty}>Organizador</h3>
+              <hr></hr>
+            </div>
+            <FormGroup>
+              <Label style={labelSty} for="exampleName">
+                Nombre
+              </Label>
+              <Input
+                onChange={event => this.inputChangeB(event)}
+                style={inputSty}
+                type="name"
+                name="nombre"
+                placeholder="Nombre"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleName">
+                Apellido
+              </Label>
+              <Input
+                onChange={event => this.inputChangeB(event)}
+                style={inputSty}
+                type="name"
+                name="apellido"
+                placeholder="Apellido"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleName">
+                Telefono
+              </Label>
+              <Input
+                onChange={event => this.inputChangeB(event)}
                 style={inputSty}
                 type="number"
-                name="idCard"
-                id="exampleidCard"
-                placeholder="Cantidad de equipos"
+                name="telefono"
+                placeholder="Celular"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleName">
+                Cedula
+              </Label>
+              <Input
+                onChange={event => this.inputChangeB(event)}
+                style={inputSty}
+                type="name"
+                name="cedula"
+                placeholder="No. de cedula"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleFechaNac">
+                Fecha de Nacimiento
+              </Label>
+              <Input
+                onChange={event => this.calculateAge(event)}
+                style={inputSty}
+                type="date"
+                name="FechaNac"
+                id="exampleFechaNac"
+                placeholder="Fecha de nacimiento"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleName">
+                Direccion
+              </Label>
+              <Input
+                onChange={event => this.inputChangeB(event)}
+                style={inputSty}
+                type="name"
+                name="direccion"
+                placeholder="Direccion"
               />
             </FormGroup>
 
             <FormGroup check>
               <Label style={labelSty} check>
-                <Input type="checkbox" /> Check me out
+                <Input type="checkbox" />
+                Check me out
               </Label>
             </FormGroup>
-            <Button>Submit</Button>
+            <Button onClick={this.sendFormData()}>Submit</Button>
           </Form>
         </div>
       </React.Fragment>
