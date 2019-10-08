@@ -56,8 +56,7 @@ const formBg = {
 
 class CreateLeague extends Component {
   state = {
-    deportes: [],
-    ligas: [],
+    sportsList: [],
     deporte: "",
     nombreLiga: "",
     descripcion: "",
@@ -82,7 +81,7 @@ class CreateLeague extends Component {
           response: res.data
         });
         this.setState({
-          deportes: res.data
+          sportsList: res.data
         });
       })
       .catch(err => {
@@ -94,11 +93,12 @@ class CreateLeague extends Component {
   }
 
   sendFormData = () => {
-    console.log("inside sendFormData()");
-    console.log(this.state);
     api
       .postLigas(this.state)
       .then(res => {
+        console.log(this.state);
+        console.log(res);
+
         console.log({
           mensaje: "Post exitoso",
           response: res.data
@@ -107,19 +107,41 @@ class CreateLeague extends Component {
       .catch(err => {
         console.log({
           mensaje: "Post Fallido",
-          response: err.data
+          response: err
         });
       });
   };
 
+  selectChange = e => {
+    e.preventDefault();
+    const name = e.target.attributes.name.value;
+    const value = e.target.value;
+    console.log(e.target);
+
+    console.log(name);
+    console.log(value);
+
+    const sportSelected = this.state.sportsList.filter(item => {
+      item.nombre === value
+        ? this.setState({ [name]: item._id })
+        : console.log("ni verga");
+    });
+    this.setState({ fechaCreada: this.getCurrentDate() });
+  };
+
   inputChange = e => {
     e.preventDefault();
-    const name = e.target.name;
+    const name = e.target.attributes.name.value;
     const value = e.target.value;
+    console.log(e.target);
+
     console.log(name);
     console.log(value);
     this.setState({ [name]: value });
+
+    console.log(this.state);
   };
+
   inputChangeB = e => {
     e.preventDefault();
     const name = e.target.name;
@@ -135,16 +157,17 @@ class CreateLeague extends Component {
     console.log(this.state);
   };
 
-  renderSports = () => {
-    const listSports = this.state.sports.map((item, i) => {
-      return <option key={i}>{item.name}</option>;
-    });
-    return listSports;
-  };
-
   renderDeportes = () => {
-    const listDeportes = this.state.deportes.map((items, i) => {
-      return <option key={i}>{items.nombre}</option>;
+    const listDeportes = this.state.sportsList.map((items, i) => {
+      return (
+        <option
+          onClick={event => this.selectChange(event)}
+          name="deporte"
+          key={i}
+        >
+          {items.nombre}
+        </option>
+      );
     });
     return listDeportes;
   };
@@ -183,12 +206,7 @@ class CreateLeague extends Component {
               <Label style={labelSty} for="exampleSelect">
                 Seleccionar deporte
               </Label>
-              <Input
-                style={inputSty}
-                type="select"
-                name="deporte"
-                id="exampleSelect"
-              >
+              <Input style={inputSty} type="select" id="exampleSelect">
                 {this.renderDeportes()}
               </Input>
             </FormGroup>
@@ -301,7 +319,7 @@ class CreateLeague extends Component {
                 Check me out
               </Label>
             </FormGroup>
-            <Button onClick={this.sendFormData()}>Submit</Button>
+            <Button onClick={this.sendFormData}>Submit</Button>
           </Form>
         </div>
       </React.Fragment>
