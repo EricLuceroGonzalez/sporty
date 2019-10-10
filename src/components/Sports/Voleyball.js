@@ -3,7 +3,7 @@ import CreateLeagueBtn from "../createLeagueBtn";
 import api from "../../api/index";
 import { Spinner } from "reactstrap";
 import LigasList from "../LigasList";
-import { faFutbol, faVolleyballBall } from "@fortawesome/free-solid-svg-icons";
+import { faVolleyballBall } from "@fortawesome/free-solid-svg-icons";
 
 
 const standardBg = {
@@ -64,6 +64,8 @@ class Volleyball extends Component {
               deporte={item.deporte.nombre}
               nombre={item.nombreLiga}
               descripcion={item.descripcion}
+              organizador={item.organizador.nombre}
+              contacto={item.organizador.telefono}
               icono={faVolleyballBall}
             ></LigasList>
           </div>
@@ -75,7 +77,7 @@ class Volleyball extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
+        <div className="container col-lg-10 col-md-11 mt-6" style={standardBg}>
           <h2>Volleyball</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>

@@ -64,6 +64,8 @@ class Softball extends Component {
             deporte={item.deporte.nombre}
             nombre={item.nombreLiga}
             descripcion={item.descripcion}
+            organizador={item.organizador.nombre}
+            contacto={item.organizador.telefono}
             icono={faBaseballBall}
           ></LigasList>
         </div>

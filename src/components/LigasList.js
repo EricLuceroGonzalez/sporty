@@ -10,8 +10,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const titleCard = {
-  fontSize: "2em",
-  fontWeight: "bolder"
+  fontSize: "1.25em",
+  fontWeight: "bolder",
+  borderBottom: "2px solid gray"
 };
 
 class LigasList extends Component {
@@ -19,6 +20,8 @@ class LigasList extends Component {
     deporte: this.props.deporte,
     nombre: this.props.nombre,
     descripcion: this.props.descripcion,
+    organizador: this.props.organizador,
+    contacto: this.props.contacto,
     favIcon: this.props.icono
   };
   render() {
@@ -27,28 +30,37 @@ class LigasList extends Component {
         style={{
           margin: "12px auto",
           boxShadow: "4px 3px 6px black",
-          backgroundColor: "rgba(12,242,142,1)"
+          backgroundColor: "rgba(212,212,212,1)"
         }}
       >
         <CardHeader>
-          <div className="row" style={{padding: '0px 20px'}}>
-            <div className="mr-auto">{this.state.deporte}</div>
+          <div className="row" style={{ padding: "0px 20px" }}>
+            <div className="mr-auto" style={{ fontFamily: "courier" }}>
+              {this.state.deporte}
+            </div>
             <div>
-              <FontAwesomeIcon icon={this.state.favIcon}></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={this.state.favIcon}
+                style={{
+                  fontSize: "1.65em"
+                }}
+              ></FontAwesomeIcon>
             </div>
           </div>
         </CardHeader>
         <CardBody>
           <CardTitle style={titleCard}>{this.state.nombre}</CardTitle>
-          <CardSubtitle>Descripcion...: {this.state.descripcion}</CardSubtitle>
+          <CardSubtitle>
+            <span style={{ fontWeight: "bold" }}>Descripcion: </span>
+            {this.state.descripcion}
+          </CardSubtitle>
           <CardSubtitle style={{ color: "red" }}>
-            {" "}
-            {this.state.nombre}
+          <span style={{ fontWeight: "bold" }}>Organizada por: </span>
+            {this.state.organizador}
           </CardSubtitle>
           <CardText>
-            Text text text text text text text text text text text text text
-            text
-          </CardText>
+          <span style={{ fontWeight: "bold" }}>Contacto: </span>
+          {this.state.contacto}</CardText>
         </CardBody>
       </Card>
     );

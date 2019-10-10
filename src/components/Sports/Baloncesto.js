@@ -64,6 +64,8 @@ class Baloncesto extends Component {
             deporte={item.deporte.nombre}
             nombre={item.nombreLiga}
             descripcion={item.descripcion}
+            organizador={item.organizador.nombre}
+            contacto={item.organizador.telefono}
             icono={faBasketballBall}
           ></LigasList>
         </div>

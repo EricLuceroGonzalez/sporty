@@ -111,6 +111,8 @@ class AllSports extends Component {
               deporte={item.deporte.nombre}
               nombre={item.nombreLiga}
               descripcion={item.descripcion}
+              organizador={item.organizador.nombre}
+              contacto={item.organizador.telefono}
               icono={this.renderIcon(item.deporte.nombre)}
             ></LigasList>
           </div>
