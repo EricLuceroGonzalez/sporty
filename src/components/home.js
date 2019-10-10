@@ -24,12 +24,15 @@ const linkStyle = { textDecoration: "none", color: "rgba(10,25,255,1)" };
 class Home extends Component {
   state = {
     sports: [
-      { name: "Futbol", icona: "faFutbol" },
-      { name: "Softball", icona: "faFutbol" },
-      { name: "Beisbol", icona: "faFutbol" },
-      { name: "Baloncesto", icona: "faFutbol" },
-      { name: "Flag-Footbal", icona: "faFutbol" },
-      { name: "Natacion", icona: "faFutbol" }
+      { name: "Futbol"},
+      { name: "Beisbol"}, 
+      { name: "Volleyball"} ,
+      { name: "Baloncesto"} ,
+      { name: "Natacion"} ,
+      { name: "Futsal"} ,
+      { name: "Billar"} ,
+      { name: "Flag"} ,
+      { name: "Softball"} 
     ]
   };
 

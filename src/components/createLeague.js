@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import api from "../api/index";
 
 const inputSty = {
@@ -120,13 +120,15 @@ class CreateLeague extends Component {
 
     console.log(name);
     console.log(value);
+    console.log("-----------------------");
 
-    const sportSelected = this.state.sportsList.filter(item => {
+    this.setState({ fechaCreada: this.getCurrentDate() });
+    this.state.sportsList.filter(item => {
+      console.log(item.nombre);
       item.nombre === value
         ? this.setState({ [name]: item._id })
-        : console.log("ni verga");
+        : console.log("ni verga")
     });
-    this.setState({ fechaCreada: this.getCurrentDate() });
   };
 
   inputChange = e => {

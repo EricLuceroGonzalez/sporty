@@ -17,7 +17,7 @@ const titleCard = {
   fontWeight: "bolder"
 };
 
-class Futbol extends Component {
+class AllSports extends Component {
   state = {
     ligas: []
   };
@@ -27,16 +27,10 @@ class Futbol extends Component {
       .getLigas()
       .then(res => {
         console.log({
-          mensaje: "Get exitoso",
+          mensaje: "Get exitoso - LIGAS!",
           response: res.data
         });
-        res.data.filter((item, i) => {
-          item.deporte.nombre === "Futbol"
-            ? this.setState(prevState => ({
-                ligas: [...prevState.ligas, item]
-              }))
-            : console.log("fuck");
-        });
+        this.setState({ ligas: res.data });
       })
       .catch(err => {
         console.log({
@@ -57,29 +51,18 @@ class Futbol extends Component {
         </div>
       );
     } else {
+      console.log(this.state);
+
       const listLigas = this.state.ligas.map((item, i) => {
+        console.log(i);
+        console.log(item.deporte);
         return (
-          <div className="col-4" key={i}>
-            <Card
-              style={{
-                margin: "12px auto",
-                boxShadow: "4px 3px 6px black",
-                backgroundColor: "rgba(12,242,142,1)"
-              }}
-            >
-              <CardBody>
-                <CardTitle style={titleCard}>{item.nombreLiga}</CardTitle>
-                <CardSubtitle>Descripcion: {item.descripcion}</CardSubtitle>
-                <CardSubtitle style={{ color: "red" }}>
-                  {" "}
-                  {item.deporte.nombre}
-                </CardSubtitle>
-                <CardText>
-                  Text text text text text text text text text text text text
-                  text text
-                </CardText>
-              </CardBody>
-            </Card>
+          <div key={i}>
+            <div>
+              {i} - {item.nombreLiga}
+              {i} - {item.descripcion}
+              <hr></hr>
+            </div>
           </div>
         );
       });
@@ -87,22 +70,12 @@ class Futbol extends Component {
     }
   };
 
-  renderLigassss = () => {
-    console.log("fuck");
-    console.log(this.state);
-    // const listLigas = this.state.ligas.filter((item, i) => {
-    //   item.deporte.nombre === "Beisbol"
-    //     ? this.setState({ligas: item})
-    //     : console.log("fuck");
-    // });
-    // return listLigas;
-  };
   render() {
     return (
       <React.Fragment>
         <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
-          <h2>Futbol</h2>
-          <div className="row">{this.renderLigas()}</div>
+          <h2>AllSports</h2>
+          <div>{this.renderLigas()}</div>
         </div>
         <CreateLeagueBtn></CreateLeagueBtn>
       </React.Fragment>
@@ -110,4 +83,4 @@ class Futbol extends Component {
   }
 }
 
-export default Futbol;
+export default AllSports;

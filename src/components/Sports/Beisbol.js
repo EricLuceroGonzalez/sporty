@@ -17,7 +17,7 @@ const titleCard = {
   fontWeight: "bolder"
 };
 
-class Futbol extends Component {
+class Beisbol extends Component {
   state = {
     ligas: []
   };
@@ -30,8 +30,10 @@ class Futbol extends Component {
           mensaje: "Get exitoso",
           response: res.data
         });
+        console.log(res.data);
+        
         res.data.filter((item, i) => {
-          item.deporte.nombre === "Futbol"
+          item.deporte.nombre === "Beisbol"
             ? this.setState(prevState => ({
                 ligas: [...prevState.ligas, item]
               }))
@@ -57,34 +59,36 @@ class Futbol extends Component {
         </div>
       );
     } else {
-      const listLigas = this.state.ligas.map((item, i) => {
-        return (
-          <div className="col-4" key={i}>
-            <Card
-              style={{
-                margin: "12px auto",
-                boxShadow: "4px 3px 6px black",
-                backgroundColor: "rgba(12,242,142,1)"
-              }}
-            >
-              <CardBody>
-                <CardTitle style={titleCard}>{item.nombreLiga}</CardTitle>
-                <CardSubtitle>Descripcion: {item.descripcion}</CardSubtitle>
-                <CardSubtitle style={{ color: "red" }}>
-                  {" "}
-                  {item.deporte.nombre}
-                </CardSubtitle>
-                <CardText>
-                  Text text text text text text text text text text text text
-                  text text
-                </CardText>
-              </CardBody>
-            </Card>
-          </div>
-        );
-      });
-      return listLigas;
+      console.log(this.state);
     }
+
+    const listLigas = this.state.ligas.map((item, i) => {
+      return (
+        <div className="col-4" key={i}>
+          <Card
+            style={{
+              margin: "12px auto",
+              boxShadow: "4px 3px 6px black",
+              backgroundColor: "rgba(12,242,142,1)"
+            }}
+          >
+            <CardBody>
+              <CardTitle style={titleCard}>{item.nombreLiga}</CardTitle>
+              <CardSubtitle>Descripcion: {item.descripcion}</CardSubtitle>
+              <CardSubtitle style={{ color: "red" }}>
+                {" "}
+                {item.deporte.nombre}
+              </CardSubtitle>
+              <CardText>
+                Text text text text text text text text text text text text text
+                text
+              </CardText>
+            </CardBody>
+          </Card>
+        </div>
+      );
+    });
+    return listLigas;
   };
 
   renderLigassss = () => {
@@ -101,7 +105,7 @@ class Futbol extends Component {
     return (
       <React.Fragment>
         <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
-          <h2>Futbol</h2>
+          <h2>Beisbol</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>
         <CreateLeagueBtn></CreateLeagueBtn>
@@ -110,4 +114,4 @@ class Futbol extends Component {
   }
 }
 
-export default Futbol;
+export default Beisbol;

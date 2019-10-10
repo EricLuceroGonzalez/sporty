@@ -17,7 +17,7 @@ const titleCard = {
   fontWeight: "bolder"
 };
 
-class Futbol extends Component {
+class FlagFootball extends Component {
   state = {
     ligas: []
   };
@@ -27,15 +27,17 @@ class Futbol extends Component {
       .getLigas()
       .then(res => {
         console.log({
-          mensaje: "Get exitoso",
+          mensaje: "Get exitoso (Flag)",
           response: res.data
         });
         res.data.filter((item, i) => {
-          item.deporte.nombre === "Futbol"
-            ? this.setState(prevState => ({
-                ligas: [...prevState.ligas, item]
-              }))
-            : console.log("fuck");
+            console.log(`item 0: ${item.deporte._id}`);
+            console.log(`item: ${item.deporte.nombre}`);
+        //   item.deporte.nombre === "FlagFootbal"
+        //     ? this.setState(prevState => ({
+        //         ligas: [...prevState.ligas, item]
+        //       }))
+        //     : console.log("fuck");
         });
       })
       .catch(err => {
@@ -57,34 +59,37 @@ class Futbol extends Component {
         </div>
       );
     } else {
-      const listLigas = this.state.ligas.map((item, i) => {
-        return (
-          <div className="col-4" key={i}>
-            <Card
-              style={{
-                margin: "12px auto",
-                boxShadow: "4px 3px 6px black",
-                backgroundColor: "rgba(12,242,142,1)"
-              }}
-            >
-              <CardBody>
-                <CardTitle style={titleCard}>{item.nombreLiga}</CardTitle>
-                <CardSubtitle>Descripcion: {item.descripcion}</CardSubtitle>
-                <CardSubtitle style={{ color: "red" }}>
-                  {" "}
-                  {item.deporte.nombre}
-                </CardSubtitle>
-                <CardText>
-                  Text text text text text text text text text text text text
-                  text text
-                </CardText>
-              </CardBody>
-            </Card>
-          </div>
-        );
-      });
-      return listLigas;
+      console.log(this.state);
     }
+
+    const listLigas = this.state.ligas.map((item, i) => {
+      console.log(item);
+      return (
+        <div className="col-4" key={i}>
+          <Card
+            style={{
+              margin: "12px auto",
+              boxShadow: "4px 3px 6px black",
+              backgroundColor: "rgba(12,242,142,1)"
+            }}
+          >
+            <CardBody>
+              <CardTitle style={titleCard}>{item.nombreLiga}</CardTitle>
+              <CardSubtitle>Descripcion: {item.descripcion}</CardSubtitle>
+              <CardSubtitle style={{ color: "red" }}>
+                {" "}
+                {item.deporte.nombre}
+              </CardSubtitle>
+              <CardText>
+                Text text text text text text text text text text text text text
+                text
+              </CardText>
+            </CardBody>
+          </Card>
+        </div>
+      );
+    });
+    return listLigas;
   };
 
   renderLigassss = () => {
@@ -101,7 +106,7 @@ class Futbol extends Component {
     return (
       <React.Fragment>
         <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
-          <h2>Futbol</h2>
+          <h2>FlagFootball</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>
         <CreateLeagueBtn></CreateLeagueBtn>
@@ -110,4 +115,4 @@ class Futbol extends Component {
   }
 }
 
-export default Futbol;
+export default FlagFootball;

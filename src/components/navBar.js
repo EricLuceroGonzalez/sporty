@@ -2,18 +2,33 @@ import React from "react";
 import { withRouter, Link } from "react-router-dom";
 
 const navStyle = {
-  boxShadow: '0px 3px 8px black'
-}
+  boxShadow: "0px 3px 8px black"
+};
 class Navbar extends React.Component {
   getNavLinkClass = path => {
     return this.props.location.pathname === path ? "active" : "";
   };
-
+  state = {
+    sportsLinks: [
+      "futbol",
+      "beisbol",
+      "voleyball",
+      "baloncesto",
+      "natacion",
+      "futsal",
+      "billar",
+      "softball",
+      "flag",
+      "all"
+    ]
+  };
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-primary myNav"
-        style={navStyle}>
+        <nav
+          className="navbar navbar-expand-lg navbar-light bg-primary myNav"
+          style={navStyle}
+        >
           <Link to={"/"} className="nav-link">
             <span
               className="navbar-brand"
@@ -40,26 +55,15 @@ class Navbar extends React.Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              <li>
-                <Link to={"/login"} className="nav-link">
-                  LogIn
-                </Link>
-              </li>
-              <li>
-                <Link to={"/"} className="nav-link">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to={"/teams"} className="nav-link">
-                  Teams
-                </Link>
-              </li>
-              <li>
-              <Link to={"/Futbol"} className="nav-link">
-                Futbol
-              </Link>
-            </li>
+              {this.state.sportsLinks.map((item, k) => {
+                return (
+                  <li key={k}>
+                    <Link to={item} className="nav-link">
+                      {item}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </nav>
