@@ -1,8 +1,21 @@
 import React, { Component } from "react";
-import { Card, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+// import { Card, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import CreateLeagueBtn from "../createLeagueBtn";
 import api from "../../api/index";
 import { Spinner } from "reactstrap";
+import LigasList from "../LigasList";
+import {
+  faBath,
+  faFutbol,
+  faBatteryEmpty,
+  faCircleNotch,
+  faSwimmer,
+  faFootballBall,
+  faBasketballBall,
+  faBaseballBall,
+  faVolleyballBall,
+  faDotCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 const standardBg = {
   boxShadow: "8px 8px 8px gray",
@@ -11,10 +24,6 @@ const standardBg = {
   border: "1px solid gray",
   padding: "70px 50px",
   margin: "30px auto"
-};
-const titleCard = {
-  fontSize: "2em",
-  fontWeight: "bolder"
 };
 
 class AllSports extends Component {
@@ -31,6 +40,13 @@ class AllSports extends Component {
           response: res.data
         });
         this.setState({ ligas: res.data });
+        // res.data.filter((item, i) => {
+        //   item.deporte.nombre === "Volleyball"
+        //     ? this.setState(prevState => ({
+        //         ligas: [...prevState.ligas, item]
+        //       }))
+        //     : console.log("fuck");
+        // });
       })
       .catch(err => {
         console.log({
@@ -40,6 +56,39 @@ class AllSports extends Component {
       });
   }
 
+  renderIcon = item => {
+    switch (item) {
+      case "Futbol":
+        return faFutbol;
+      case "Beisbol":
+        return faBaseballBall;
+        break;
+        case "Softball":
+            return faBaseballBall;
+            break;
+      case "Volleyball":
+        return faVolleyballBall;
+        break;
+      case "Futsal":
+        return faFutbol;
+        break;
+      case "Baloncesto":
+        return faBasketballBall;
+        break;
+      case "FlagFootball":
+        return faFootballBall;
+        break;
+      case "Natacion":
+        return faSwimmer;
+        break;
+      case "Billar":
+        return faDotCircle;
+        break;
+      default:
+        return faBatteryEmpty;
+        break;
+    }
+  };
   renderLigas = () => {
     if (this.state.ligas.length === 0) {
       return (
@@ -54,15 +103,16 @@ class AllSports extends Component {
       console.log(this.state);
 
       const listLigas = this.state.ligas.map((item, i) => {
-        console.log(i);
-        console.log(item.deporte);
+        // console.log(item.deporte.nombre);
+
         return (
-          <div key={i}>
-            <div>
-              {i} - {item.nombreLiga}
-              {i} - {item.descripcion}
-              <hr></hr>
-            </div>
+          <div className="col-4" key={i}>
+            <LigasList
+              deporte={item.deporte.nombre}
+              nombre={item.nombreLiga}
+              descripcion={item.descripcion}
+              icono={this.renderIcon(item.deporte.nombre)}
+            ></LigasList>
           </div>
         );
       });
@@ -75,7 +125,7 @@ class AllSports extends Component {
       <React.Fragment>
         <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
           <h2>AllSports</h2>
-          <div>{this.renderLigas()}</div>
+          <div className="row">{this.renderLigas()}</div>
         </div>
         <CreateLeagueBtn></CreateLeagueBtn>
       </React.Fragment>

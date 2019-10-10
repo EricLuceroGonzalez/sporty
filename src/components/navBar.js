@@ -4,6 +4,13 @@ import { withRouter, Link } from "react-router-dom";
 const navStyle = {
   boxShadow: "0px 3px 8px black"
 };
+const impact = {
+  color: "white",
+  fontWeight: "bolder",
+  fontSize: "1.5em",
+  padding: '5px 14px',
+  textShadow: "2px 2px 1px black"
+};
 class Navbar extends React.Component {
   getNavLinkClass = path => {
     return this.props.location.pathname === path ? "active" : "";
@@ -30,15 +37,7 @@ class Navbar extends React.Component {
           style={navStyle}
         >
           <Link to={"/"} className="nav-link">
-            <span
-              className="navbar-brand"
-              style={{
-                color: "white",
-                fontWeight: "bolder",
-                fontSize: "2em",
-                textShadow: "2px 2px 1px black"
-              }}
-            >
+            <span className="navbar-brand" style={impact}>
               Navbar
             </span>
           </Link>
@@ -54,17 +53,24 @@ class Navbar extends React.Component {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav mr-auto">
               {this.state.sportsLinks.map((item, k) => {
                 return (
                   <li key={k}>
-                    <Link to={item} className="nav-link">
+                    <Link to={`/${item}`} className="nav-link">
                       {item}
                     </Link>
                   </li>
                 );
               })}
             </ul>
+            <Link to={"Create"}>
+              <button className="btn btn-success my-2 my-sm-0" 
+              style={impact}
+              type="submit">
+                Crea tu liga!
+              </button>
+            </Link>
           </div>
         </nav>
 

@@ -22,7 +22,6 @@ function App() {
   return (
     <div>
       <Router>
-        <div>
           <Navbar></Navbar>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -40,7 +39,6 @@ function App() {
             <Route path="/flag" component={FlagFootball} />
             <Route path="/all" component={AllSports} />
           </Switch>
-        </div>
       </Router>
     </div>
   );
