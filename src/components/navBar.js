@@ -1,5 +1,7 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const navStyle = {
   boxShadow: "0px 3px 8px black"
@@ -8,28 +10,51 @@ const impact = {
   color: "white",
   fontWeight: "bolder",
   fontSize: "1.5em",
-  padding: '5px 14px',
+  padding: "5px 14px",
   textShadow: "2px 2px 1px black"
 };
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true,
+      sportsLinks: [
+        "futbol",
+        "beisbol",
+        "voleyball",
+        "baloncesto",
+        "natacion",
+        "futsal",
+        "billar",
+        "softball",
+        "flag",
+        "all"
+      ]
+    };
+  }
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  }
   getNavLinkClass = path => {
     return this.props.location.pathname === path ? "active" : "";
   };
-  state = {
-    sportsLinks: [
-      "futbol",
-      "beisbol",
-      "voleyball",
-      "baloncesto",
-      "natacion",
-      "futsal",
-      "billar",
-      "softball",
-      "flag",
-      "all"
-    ]
-  };
   render() {
+    const colorBlue = { color: "#3b5999" };
+    const linksNav = {
+      margin: "0px 5px",
+      color: "#3b5999",
+      fontFamily: "Montserrat"
+    };
+    const collapsed = this.state.collapsed;
+    const classOne = collapsed
+      ? "collapse navbar-collapse"
+      : "collapse navbar-collapse show";
+    const classTwo = collapsed
+      ? "navbar-toggler navbar-toggler-right collapsed"
+      : "navbar-toggler navbar-toggler-right";
     return (
       <div>
         <nav
@@ -38,21 +63,27 @@ class Navbar extends React.Component {
         >
           <Link to={"/"} className="nav-link">
             <span className="navbar-brand" style={impact}>
-              Navbar
+              Sporty
             </span>
           </Link>
           <button
-            className="navbar-toggler"
+            onClick={this.toggleNavbar}
+            className={`${classTwo}`}
             type="button"
             data-toggle="collapse"
-            data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
+            data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon" />
+            <span className="navbar-toggler-icon">
+              <FontAwesomeIcon
+                icon={faBars}
+                style={{ color: "#3b5999", fontSize: "0.8em" }}
+              ></FontAwesomeIcon>
+            </span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <div className={`${classOne}`} id="navbarResponsive">
             <ul className="navbar-nav mr-auto">
               {this.state.sportsLinks.map((item, k) => {
                 return (
@@ -65,9 +96,11 @@ class Navbar extends React.Component {
               })}
             </ul>
             <Link to={"Create"}>
-              <button className="btn btn-success my-2 my-sm-0" 
-              style={impact}
-              type="submit">
+              <button
+                className="btn btn-success my-2 my-sm-0"
+                style={impact}
+                type="submit"
+              >
                 Crea tu liga!
               </button>
             </Link>
