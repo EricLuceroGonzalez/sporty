@@ -106,7 +106,6 @@ class AllSports extends Component {
         // console.log(item.deporte.nombre);
 
         return (
-          <div className="col-4" key={i}>
             <LigasList
               deporte={item.deporte.nombre}
               nombre={item.nombreLiga}
@@ -115,7 +114,6 @@ class AllSports extends Component {
               contacto={item.organizador.telefono}
               icono={this.renderIcon(item.deporte.nombre)}
             ></LigasList>
-          </div>
         );
       });
       return listLigas;
@@ -125,8 +123,8 @@ class AllSports extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
-          <h2>AllSports</h2>
+      <div className="container col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-6" style={standardBg}>
+      <h2>AllSports</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>
         <CreateLeagueBtn></CreateLeagueBtn>

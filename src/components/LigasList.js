@@ -26,43 +26,50 @@ class LigasList extends Component {
   };
   render() {
     return (
-      <Card
-        style={{
-          margin: "12px auto",
-          boxShadow: "4px 3px 6px black",
-          backgroundColor: "rgba(212,212,212,1)"
-        }}
+      <div
+        className="col-xs-6 col-md-4 col-sm-6 col-lg-3"
+        style={{ fontSize: "10px" }}
       >
-        <CardHeader>
-          <div className="row" style={{ padding: "0px 20px" }}>
-            <div className="mr-auto" style={{ fontFamily: "courier" }}>
-              {this.state.deporte}
+        <Card
+          style={{
+            margin: "12px auto",
+            boxShadow: "4px 3px 6px black",
+            backgroundColor: "rgba(212,212,212,1)"
+          }}
+        >
+          <CardHeader>
+            <div className="row" style={{ padding: "0px 20px" }}>
+              <div className="mr-auto" style={{ fontFamily: "courier" }}>
+                {this.state.deporte}
+              </div>
+              <div>
+                <FontAwesomeIcon
+                  icon={this.state.favIcon}
+                  style={{
+                    fontSize: "1.95em",
+                    color: 'blue'
+                  }}
+                ></FontAwesomeIcon>
+              </div>
             </div>
-            <div>
-              <FontAwesomeIcon
-                icon={this.state.favIcon}
-                style={{
-                  fontSize: "1.65em"
-                }}
-              ></FontAwesomeIcon>
-            </div>
-          </div>
-        </CardHeader>
-        <CardBody>
-          <CardTitle style={titleCard}>{this.state.nombre}</CardTitle>
-          <CardSubtitle>
-            <span style={{ fontWeight: "bold" }}>Descripcion: </span>
-            {this.state.descripcion}
-          </CardSubtitle>
-          <CardSubtitle style={{ color: "red" }}>
-          <span style={{ fontWeight: "bold" }}>Organizada por: </span>
-            {this.state.organizador}
-          </CardSubtitle>
-          <CardText>
-          <span style={{ fontWeight: "bold" }}>Contacto: </span>
-          {this.state.contacto}</CardText>
-        </CardBody>
-      </Card>
+          </CardHeader>
+          <CardBody>
+            <CardTitle style={titleCard}>{this.state.nombre}</CardTitle>
+            <CardSubtitle>
+              <span style={{ fontWeight: "bold" }}>Descripcion: </span>
+              {this.state.descripcion}
+            </CardSubtitle>
+            <CardSubtitle style={{ color: "red" }}>
+              <span style={{ fontWeight: "bold" }}>Organizada por: </span>
+              {this.state.organizador}
+            </CardSubtitle>
+            <CardText>
+              <span style={{ fontWeight: "bold" }}>Contacto: </span>
+              {this.state.contacto}
+            </CardText>
+          </CardBody>
+        </Card>
+      </div>
     );
   }
 }

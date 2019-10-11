@@ -5,11 +5,9 @@ import { Spinner } from "reactstrap";
 import LigasList from "../LigasList";
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 
-
 const standardBg = {
-  boxShadow: "8px 8px 8px gray",
-  background:
-    "linear-gradient(90deg, rgba(249,56,155,1) 0%, rgba(42,241,185,0.8) 100%)",
+  background: 'rgb(27,96,242)',
+  background: 'linear-gradient(90deg, rgba(27,96,242,1) 0%, rgba(145,200,255,0.5) 100%)',
   border: "1px solid gray",
   padding: "70px 50px",
   margin: "30px auto"
@@ -57,36 +55,23 @@ class Futbol extends Component {
     } else {
       const listLigas = this.state.ligas.map((item, i) => {
         return (
-          <div className="col-4" key={i}>
             <LigasList
               deporte={item.deporte.nombre}
               nombre={item.nombreLiga}
               descripcion={item.descripcion}
               organizador={item.organizador.nombre}
               contacto={item.organizador.telefono}
-              icono= {faFutbol}
+              icono={faFutbol}
             ></LigasList>
-          </div>
         );
       });
       return listLigas;
     }
   };
-
-  renderLigassss = () => {
-    console.log("fuck");
-    console.log(this.state);
-    // const listLigas = this.state.ligas.filter((item, i) => {
-    //   item.deporte.nombre === "Beisbol"
-    //     ? this.setState({ligas: item})
-    //     : console.log("fuck");
-    // });
-    // return listLigas;
-  };
   render() {
     return (
       <React.Fragment>
-        <div className="container col-lg-10 col-md-8 mt-6" style={standardBg}>
+        <div className="container col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-6" style={standardBg}>
           <h2>Futbol</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>

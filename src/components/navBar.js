@@ -77,10 +77,7 @@ class Navbar extends React.Component {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon">
-              <FontAwesomeIcon
-                icon={faBars}
-                style={{ color: "#3b5999", fontSize: "0.8em" }}
-              ></FontAwesomeIcon>
+
             </span>
           </button>
           <div className={`${classOne}`} id="navbarResponsive">

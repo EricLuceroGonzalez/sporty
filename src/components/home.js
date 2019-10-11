@@ -6,9 +6,8 @@ import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const standardBg = {
-  boxShadow: "8px 8px 8px gray",
-  background:
-    "linear-gradient(90deg, rgba(249,56,155,1) 0%, rgba(42,241,185,0.8) 100%)",
+  background: 'rgb(27,96,242)',
+  background: 'linear-gradient(90deg, rgba(27,96,242,1) 0%, rgba(145,200,255,0.5) 100%)',
   border: "1px solid gray",
   padding: "70px 50px",
   margin: "30px auto"
@@ -39,13 +38,17 @@ class Home extends Component {
   renderSports = () => {
     const listSports = this.state.sports.map((item, i) => {
       return (
-        <div className="col-4" key={i}>
+        <div
+        key={i}
+        className="col-xs-10 col-md-4 col-sm-6 col-lg-3"
+        style={{ fontSize: "10px" }}
+      >
           <Link to={item.name} style={linkStyle}>
             <Card
               style={{
                 margin: "12px auto",
                 boxShadow: "4px 3px 6px black",
-                backgroundColor: "rgba(12,242,142,1)"
+                backgroundColor: "rgba(242,242,242,1)"
               }}
             >
               <div className="container">
@@ -71,7 +74,7 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container col-md-8 mt-6" style={standardBg}>
+        <div className="container col-sm-10 col-xs-10 col-md-8 mt-6" style={standardBg}>
           <h2>Eventos</h2>
           <div className="row">{this.renderSports()}</div>
         </div>
