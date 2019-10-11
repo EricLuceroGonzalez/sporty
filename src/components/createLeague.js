@@ -116,15 +116,10 @@ class CreateLeague extends Component {
     e.preventDefault();
     const name = e.target.attributes.name.value;
     const value = e.target.value;
-    console.log(e.target);
-
-    console.log(name);
     console.log(value);
-    console.log("-----------------------");
 
     this.setState({ fechaCreada: this.getCurrentDate() });
     this.state.sportsList.filter(item => {
-      console.log(item.nombre);
       item.nombre === value
         ? this.setState({ [name]: item._id })
         : console.log("ni verga")
@@ -208,7 +203,8 @@ class CreateLeague extends Component {
               <Label style={labelSty} for="exampleSelect">
                 Seleccionar deporte
               </Label>
-              <Input style={inputSty} type="select" id="exampleSelect">
+              <Input style={inputSty} type="select" id="exampleSelect"
+              >
                 {this.renderDeportes()}
               </Input>
             </FormGroup>
