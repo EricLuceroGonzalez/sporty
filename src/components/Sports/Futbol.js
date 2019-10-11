@@ -56,6 +56,7 @@ class Futbol extends Component {
       const listLigas = this.state.ligas.map((item, i) => {
         return (
             <LigasList
+            key={i}
               deporte={item.deporte.nombre}
               nombre={item.nombreLiga}
               descripcion={item.descripcion}
