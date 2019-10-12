@@ -72,6 +72,9 @@ class Navbar extends React.Component {
               Sporty
             </span>
           </Link>
+          <Link to={"/all"} style={navItem}>
+          AllSports
+        </Link>
           <button
             onClick={this.toggleNavbar}
             className={`${classTwo}`}
@@ -86,12 +89,6 @@ class Navbar extends React.Component {
           </button>
           <div className={`${classOne}`} id="navbarResponsive">
             <ul className="navbar-nav mr-auto">
-              <li>
-                <Link to={"/all"} style={navItem}>
-                  All
-                </Link>
-              </li>
-
               {this.state.sportsLinks.map((item, k) => {
                 return (
                   <li key={k}>
