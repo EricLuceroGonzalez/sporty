@@ -378,7 +378,8 @@ class CreateLeague extends Component {
                 Check me out
               </Label>
             </FormGroup>
-            <Button onClick={this.sendFormData}>Submit</Button>
+            <Button 
+            onClick={this.sendFormData}>Submit</Button>
           </Form>
         </div>
       </React.Fragment>

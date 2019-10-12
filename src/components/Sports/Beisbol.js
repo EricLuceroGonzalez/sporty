@@ -26,9 +26,8 @@ class Beisbol extends Component {
           mensaje: "Get exitoso",
           response: res.data
         });
-        this.setState({ ligas: res.data });
 
-        this.state.filter((item, i) => {
+        res.data.filter((item, i) => {
           console.log(item.nombreLiga);
 
           item.deporte.nombre === "Beisbol"
