@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Container,
+  ButtonGroup,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from "reactstrap";
 import api from "../api/index";
 
 const inputSty = {
@@ -41,6 +49,7 @@ const labelNameSty = {
 };
 
 const standardBg = {
+  fontSize: '8px',
   boxShadow: "8px 8px 8px gray",
   background:
     "linear-gradient(90deg, rgba(49,56,155,1) 0%, rgba(42,211,185,0.8) 100%)",
@@ -52,6 +61,14 @@ const formBg = {
   backgroundColor: "white",
   padding: "10px 15px",
   borderRadius: "16px"
+};
+
+const clickedBtn = {
+  backgroundColor: "green"
+};
+
+const noClickedBtn = {
+  backgroundColor: "gray"
 };
 
 class CreateLeague extends Component {
@@ -69,7 +86,8 @@ class CreateLeague extends Component {
       direccion: ""
     },
 
-    fechaCreada: ""
+    fechaCreada: "",
+    toggleBtn: false
   };
 
   componentDidMount() {
@@ -116,13 +134,28 @@ class CreateLeague extends Component {
     e.preventDefault();
     const name = e.target.attributes.name.value;
     const value = e.target.value;
-    console.log(value);
+    console.log(`value: ${value}`);
+    console.log(`name: ${name}`);
 
     this.setState({ fechaCreada: this.getCurrentDate() });
     this.state.sportsList.filter(item => {
       item.nombre === value
         ? this.setState({ [name]: item._id })
-        : console.log("ni verga")
+        : console.log("ni verga");
+    });
+  };
+
+  selectChangeBtn = e => {
+    e.preventDefault();
+    // const name = e.target.attributes.name.value;
+    const name = e.target.name;
+    const value = e.target.textContent;
+
+    this.setState({ fechaCreada: this.getCurrentDate(), toggleBtn: true });
+    this.state.sportsList.filter(item => {
+      item.nombre === value
+        ? this.setState({ [name]: item._id })
+        : console.log("");
     });
   };
 
@@ -169,6 +202,23 @@ class CreateLeague extends Component {
     return listDeportes;
   };
 
+  renderDeportesss = () => {
+    const listDeportes = this.state.sportsList.map((items, i) => {
+      return (
+        <Button
+          onClick={event => this.selectChangeBtn(event)}
+          style={this.state.toggleBtn === false ? noClickedBtn : clickedBtn}
+          name="deporte"
+          className="col-3 mr-2 ml-2 mb-2"
+          key={i}
+        >
+          {items.nombre}
+        </Button>
+      );
+    });
+    return listDeportes;
+  };
+
   calculateAge = e => {
     console.log("calculateAge()");
     console.log(e.target.value);
@@ -203,8 +253,19 @@ class CreateLeague extends Component {
               <Label style={labelSty} for="exampleSelect">
                 Seleccionar deporte
               </Label>
-              <Input style={inputSty} type="select" id="exampleSelect"
-              >
+              <ButtonGroup>
+                <Container>
+                  <div className="row justify-content-center">
+                    {this.renderDeportesss()}
+                  </div>
+                </Container>
+              </ButtonGroup>
+            </FormGroup>
+            <FormGroup>
+              <Label style={labelSty} for="exampleSelect">
+                Seleccionar deporte
+              </Label>
+              <Input style={inputSty} type="select" id="exampleSelect">
                 {this.renderDeportes()}
               </Input>
             </FormGroup>

@@ -6,6 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const navStyle = {
   boxShadow: "0px 3px 8px black"
 };
+const navItem = {
+  color: "white",
+  fontWeight: "bolder",
+  fontSize: "1.15em",
+  padding: "5px 14px",
+  textShadow: "2px 2px 1px black"
+};
 const impact = {
   color: "white",
   fontWeight: "bolder",
@@ -28,8 +35,7 @@ class Navbar extends React.Component {
         "futsal",
         "billar",
         "softball",
-        "flag",
-        "all"
+        "flag"
       ]
     };
   }
@@ -76,16 +82,20 @@ class Navbar extends React.Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon">
-
-            </span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div className={`${classOne}`} id="navbarResponsive">
             <ul className="navbar-nav mr-auto">
+              <li>
+                <Link to={"/all"} style={navItem}>
+                  All
+                </Link>
+              </li>
+
               {this.state.sportsLinks.map((item, k) => {
                 return (
                   <li key={k}>
-                    <Link to={`/${item}`} className="nav-link">
+                    <Link to={`/${item}`} style={navItem}>
                       {item}
                     </Link>
                   </li>
