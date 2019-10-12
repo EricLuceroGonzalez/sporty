@@ -49,12 +49,12 @@ const labelNameSty = {
 };
 
 const standardBg = {
-  fontSize: '8px',
+  fontSize: '10px',
   boxShadow: "8px 8px 8px gray",
   background:
     "linear-gradient(90deg, rgba(49,56,155,1) 0%, rgba(42,211,185,0.8) 100%)",
   border: "1px solid gray",
-  padding: "70px 50px",
+  padding: "40px 20px",
   margin: "30px auto"
 };
 const formBg = {
@@ -244,7 +244,7 @@ class CreateLeague extends Component {
     return (
       <React.Fragment>
         <div className="container col-md-8 mt-6" style={standardBg}>
-          <Form style={formBg}>
+          <Form style={formBg} className='col-sm-12 col-xs-12'>
             <div className="mt-4">
               <h3 style={labelNameSty}>Datos de la liga</h3>
               <hr></hr>
