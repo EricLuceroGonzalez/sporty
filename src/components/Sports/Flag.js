@@ -27,6 +27,7 @@ class FlagFootball extends Component {
           mensaje: "Get exitoso (Flag)",
           response: res.data.res
         })
+        
         res.data.res.filter((item, i) => {
           console.log(`item 0: ${item.deporte._id}`);
           console.log(`item: ${item.deporte.nombre}`);
@@ -56,10 +57,8 @@ class FlagFootball extends Component {
         </div>
       );
     } else {
-      console.log(this.state);
 
       const listLigas = this.state.ligas.map((item, i) => {
-        console.log(item);
         return (
           <LigasList
             key={i}

@@ -17,6 +17,7 @@ import Billar from "./components/Sports/Billar";
 import Softball from "./components/Sports/Softball";
 import FlagFootball from "./components/Sports/Flag";
 import AllSports from "./components/Sports/AllSports";
+import LigaDetail from "./components/LigaDetail";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/softball" component={Softball} />
           <Route path="/flag" component={FlagFootball} />
           <Route path="/all" component={AllSports} />
+          <Route exact path="/ligaDetail/:id" component={LigaDetail} />
         </Switch>
       </Router>
     </div>
