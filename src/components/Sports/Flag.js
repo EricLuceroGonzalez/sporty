@@ -25,9 +25,9 @@ class FlagFootball extends Component {
       .then(res => {
         console.log({
           mensaje: "Get exitoso (Flag)",
-          response: res.data
-        });
-        res.data.filter((item, i) => {
+          response: res.data.res
+        })
+        res.data.res.filter((item, i) => {
           console.log(`item 0: ${item.deporte._id}`);
           console.log(`item: ${item.deporte.nombre}`);
           item.deporte.nombre === "FlagFootball"
@@ -63,6 +63,7 @@ class FlagFootball extends Component {
         return (
           <LigasList
             key={i}
+            id={item._id}
             deporte={item.deporte.nombre}
             nombre={item.nombreLiga}
             descripcion={item.descripcion}

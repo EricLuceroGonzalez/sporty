@@ -22,23 +22,23 @@ function App() {
   return (
     <div>
       <Router>
-          <Navbar></Navbar>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/teams" component={Teams} />
-            <Route path="/login" component={LogIn} />
-            <Route path="/Create" component={CreateLeague} />
-            <Route path="/futbol" component={Futbol} />
-            <Route path="/beisbol" component={Beisbol} />
-            <Route path="/voleyball" component={Volleyball} />
-            <Route path="/baloncesto" component={Baloncesto} />
-            <Route path="/natacion" component={Natacion} />
-            <Route path="/futsal" component={Futsal} />
-            <Route path="/billar" component={Billar} />
-            <Route path="/softball" component={Softball} />
-            <Route path="/flag" component={FlagFootball} />
-            <Route path="/all" component={AllSports} />
-          </Switch>
+        <Navbar></Navbar>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/teams" component={Teams} />
+          <Route path="/login" component={LogIn} />
+          <Route path="/Create" component={CreateLeague} />
+          <Route path="/futbol" component={Futbol} />
+          <Route path="/beisbol" component={Beisbol} />
+          <Route path="/voleyball" component={Volleyball} />
+          <Route path="/baloncesto" component={Baloncesto} />
+          <Route path="/natacion" component={Natacion} />
+          <Route path="/futsal" component={Futsal} />
+          <Route path="/billar" component={Billar} />
+          <Route path="/softball" component={Softball} />
+          <Route path="/flag" component={FlagFootball} />
+          <Route path="/all" component={AllSports} />
+        </Switch>
       </Router>
     </div>
   );

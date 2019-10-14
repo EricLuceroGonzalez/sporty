@@ -5,10 +5,8 @@ import api from "../../api/index";
 import { Spinner } from "reactstrap";
 import LigasList from "../LigasList";
 import {
-  faBath,
   faFutbol,
   faBatteryEmpty,
-  faCircleNotch,
   faSwimmer,
   faFootballBall,
   faBasketballBall,
@@ -39,14 +37,7 @@ class AllSports extends Component {
           mensaje: "Get exitoso - LIGAS!",
           response: res.data
         });
-        this.setState({ ligas: res.data });
-        // res.data.filter((item, i) => {
-        //   item.deporte.nombre === "Volleyball"
-        //     ? this.setState(prevState => ({
-        //         ligas: [...prevState.ligas, item]
-        //       }))
-        //     : console.log("fuck");
-        // });
+        this.setState({ ligas: res.data.res });
       })
       .catch(err => {
         console.log({
@@ -62,31 +53,22 @@ class AllSports extends Component {
         return faFutbol;
       case "Beisbol":
         return faBaseballBall;
-        break;
-        case "Softball":
-            return faBaseballBall;
-            break;
+      case "Softball":
+        return faBaseballBall;
       case "Volleyball":
         return faVolleyballBall;
-        break;
       case "Futsal":
         return faFutbol;
-        break;
       case "Baloncesto":
         return faBasketballBall;
-        break;
       case "FlagFootball":
         return faFootballBall;
-        break;
       case "Natacion":
         return faSwimmer;
-        break;
       case "Billar":
         return faDotCircle;
-        break;
       default:
         return faBatteryEmpty;
-        break;
     }
   };
   renderLigas = () => {
@@ -106,14 +88,16 @@ class AllSports extends Component {
         // console.log(item.deporte.nombre);
 
         return (
-            <LigasList
-              deporte={item.deporte.nombre}
-              nombre={item.nombreLiga}
-              descripcion={item.descripcion}
-              organizador={item.organizador.nombre}
-              contacto={item.organizador.telefono}
-              icono={this.renderIcon(item.deporte.nombre)}
-            ></LigasList>
+          <LigasList
+            key={i}
+            id={item._id}
+            deporte={item.deporte.nombre}
+            nombre={item.nombreLiga}
+            descripcion={item.descripcion}
+            organizador={item.organizador.nombre}
+            contacto={item.organizador.telefono}
+            icono={this.renderIcon(item.deporte.nombre)}
+          ></LigasList>
         );
       });
       return listLigas;
@@ -123,8 +107,11 @@ class AllSports extends Component {
   render() {
     return (
       <React.Fragment>
-      <div className="container col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-6" style={standardBg}>
-      <h2>AllSports</h2>
+        <div
+          className="container col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-6"
+          style={standardBg}
+        >
+          <h2>AllSports</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>
         <CreateLeagueBtn></CreateLeagueBtn>

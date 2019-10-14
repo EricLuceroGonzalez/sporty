@@ -26,7 +26,7 @@ class Billar extends Component {
           mensaje: "Get exitoso",
           response: res.data
         });
-        res.data.filter((item, i) => {
+        res.data.res.filter((item, i) => {
           item.deporte.nombre === "Billar"
             ? this.setState(prevState => ({
                 ligas: [...prevState.ligas, item]
@@ -58,6 +58,7 @@ class Billar extends Component {
         return (
           <LigasList
           key={i}
+          id={item._id}
           deporte={item.deporte.nombre}
           nombre={item.nombreLiga}
           descripcion={item.descripcion}

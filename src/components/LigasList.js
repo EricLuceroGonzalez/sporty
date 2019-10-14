@@ -47,7 +47,7 @@ class LigasList extends Component {
                   icon={this.state.favIcon}
                   style={{
                     fontSize: "1.95em",
-                    color: 'blue'
+                    color: "blue"
                   }}
                 ></FontAwesomeIcon>
               </div>

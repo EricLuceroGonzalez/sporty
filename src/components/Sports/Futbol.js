@@ -26,7 +26,7 @@ class Futbol extends Component {
           mensaje: "Get exitoso (FUT!)",
           response: res.data
         });
-        res.data.filter((item, i) => {
+        res.data.res.filter((item, i) => {
           item.deporte.nombre === "Futbol"
             ? this.setState(prevState => ({
                 ligas: [...prevState.ligas, item]
@@ -57,6 +57,7 @@ class Futbol extends Component {
         return (
             <LigasList
             key={i}
+            id={item._id}
               deporte={item.deporte.nombre}
               nombre={item.nombreLiga}
               descripcion={item.descripcion}
