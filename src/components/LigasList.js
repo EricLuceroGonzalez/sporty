@@ -43,8 +43,7 @@ class LigasList extends Component {
           to={{
             pathname: `/ligaDetail/${this.state.id}`,
             query: {
-              id: this.state.id,
-              nombre: this.state.nombre
+              id: this.state.id
             }
           }}
         >

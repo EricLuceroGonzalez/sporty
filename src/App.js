@@ -18,6 +18,7 @@ import Softball from "./components/Sports/Softball";
 import FlagFootball from "./components/Sports/Flag";
 import AllSports from "./components/Sports/AllSports";
 import LigaDetail from "./components/LigaDetail";
+import createTeam from "./components/createTeam";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/teams" component={Teams} />
           <Route path="/login" component={LogIn} />
-          <Route path="/Create" component={CreateLeague} />
+          <Route path="/newLiga" component={CreateLeague} />
           <Route path="/futbol" component={Futbol} />
           <Route path="/beisbol" component={Beisbol} />
           <Route path="/voleyball" component={Volleyball} />
@@ -40,6 +41,7 @@ function App() {
           <Route path="/flag" component={FlagFootball} />
           <Route path="/all" component={AllSports} />
           <Route exact path="/ligaDetail/:id" component={LigaDetail} />
+          <Route exact path="/create/:id" component={createTeam} />
         </Switch>
       </Router>
     </div>

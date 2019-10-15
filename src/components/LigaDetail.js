@@ -1,6 +1,28 @@
 import React, { Component } from "react";
 import api from "../api/index";
+import {
+  Card,
+  CardHeader,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
+const titleCard = {
+  fontSize: "1.25em",
+  fontWeight: "bolder",
+  borderBottom: "2px solid gray"
+};
+
+const impact = {
+  color: "white",
+  fontWeight: "bolder",
+  fontSize: "1.5em",
+  padding: "5px 14px",
+  textShadow: "2px 2px 1px black"
+};
 class LigaDetail extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +47,11 @@ class LigaDetail extends Component {
           response: res.data.res
         });
         this.setState({
-          // deporte: res.data.res.response.deporte,
+          deporte: res.data.res.deporte.nombre,
           nombre: res.data.res.nombreLiga,
           descripcion: res.data.res.descripcion,
           organizador: res.data.res.organizador.nombre,
-          contacto:  res.data.res.organizador.telefono,
+          contacto: res.data.res.organizador.telefono,
           icono: ""
         });
       })
@@ -43,13 +65,84 @@ class LigaDetail extends Component {
   render() {
     return (
       <div>
-        <h1>LigaDetail</h1>
-        <h2>id {this.state.id}</h2>
-        <h2>id {this.state.id}</h2>
-        <h2>id {this.state.nombre}</h2>
-        <h2>id {this.state.organizador}</h2>
-        <h2>id {this.state.contacto}</h2>
-        <h2> id</h2>
+        <div
+          className="col-xs-6 col-md-4 col-sm-6 col-lg-8 mt-4 ml-auto mr-auto"
+          style={{ fontSize: "14px" }}
+        >
+          <Card
+            style={{
+              margin: "12px auto",
+              boxShadow: "4px 3px 6px black",
+              backgroundColor: "rgba(202,202,202,1)"
+            }}
+          >
+            <CardHeader>
+              <div className="row" style={{ padding: "0px 20px" }}>
+                <div className="mr-auto" style={{ fontFamily: "courier" }}>
+                  {this.state.nombre}
+                </div>
+              </div>
+            </CardHeader>
+            <CardBody>
+              <CardTitle style={titleCard}>{this.state.nombre}</CardTitle>
+              <CardSubtitle>
+                <span style={{ fontWeight: "bold" }}>Descripcion: </span>
+                {this.state.descripcion}
+              </CardSubtitle>
+              <CardSubtitle style={{ color: "red" }}>
+                <span style={{ fontWeight: "bold" }}>Organizada por: </span>
+                {this.state.organizador}
+              </CardSubtitle>
+              <CardText>
+                <span style={{ fontWeight: "bold" }}>Contacto: </span>
+                {this.state.contacto}
+              </CardText>
+            </CardBody>
+          </Card>
+
+          <Card
+            style={{
+              margin: "12px auto",
+              boxShadow: "4px 3px 6px black",
+              backgroundColor: "rgba(202,202,202,1)"
+            }}
+          >
+            <CardHeader>
+              <div className="row" style={{ padding: "0px 20px" }}>
+                <div
+                  className="mr-auto"
+                  style={{ fontSize: "1.5em", fontWeight: "bolder" }}
+                >
+                  Equipos
+                </div>
+                <Link
+                  to={{
+                    pathname: `/create/${this.state.id}`,
+                    query: {
+                      id: this.state.id
+                    }
+                  }}
+                >
+                  <button
+                    className="btn btn-success my-2 my-sm-0"
+                    style={impact}
+                    type="submit"
+                  >
+                    Crear equipo
+                  </button>
+                </Link>
+              </div>
+            </CardHeader>
+            <CardBody>
+              <CardTitle style={titleCard}>CardTitle</CardTitle>
+              <CardSubtitle>CardSubTitle</CardSubtitle>
+              <CardText>
+                <span style={{ fontWeight: "bold" }}>Card: </span>
+                Text
+              </CardText>
+            </CardBody>
+          </Card>
+        </div>
       </div>
     );
   }

@@ -97,7 +97,7 @@ class Navbar extends React.Component {
                 );
               })}
             </ul>
-            <Link to={"Create"}>
+            <Link to={"newLiga"}>
               <button
                 className="btn btn-success my-2 my-sm-0"
                 style={impact}
