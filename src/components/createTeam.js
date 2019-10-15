@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import api from "../api/index";
+import { Link } from "react-router-dom";
+
 import {
   Container,
   ButtonGroup,
@@ -9,6 +11,9 @@ import {
   Label,
   Input
 } from "reactstrap";
+
+import CreatePlayer from "./createPlayer";
+import BasicForm from "./basicForm";
 
 const allBg = {
   margin: "12px auto",
@@ -77,12 +82,15 @@ class createTeam extends Component {
     super(props);
     console.dir(props);
     this.state = {
-      id: props.match.params.id,
-      deporte: "",
+      ligaId: props.match.params.id,
       nombre: "",
-      descripcion: "",
-      organizador: "",
-      contacto: "",
+      directorN: "",
+      directorA: "",
+      directorC: "",
+      directorE: "",
+      directorT: "",
+      directorD: "",
+      jugador: "",
       icono: ""
     };
   }
@@ -112,16 +120,39 @@ class createTeam extends Component {
       });
   }
 
+  inputChange = e => {
+    e.preventDefault();
+    const name = e.target.attributes.name.value;
+    const value = e.target.value;
+    console.log(e.target);
+
+    console.log(name);
+    console.log(value);
+    this.setState({ [name]: value });
+
+    console.log(this.state);
+  };
+
   render() {
     return (
       <React.Fragment>
-        <button
-          className="btn btn-success m-4 "
-          // style={{ margin: "20px auto" }}
-          type="submit"
+        <Link
+          to={{
+            pathname: `/ligaDetail/${this.state.id}`,
+            query: {
+              id: this.state.id
+            }
+          }}
         >
-          Regresar
-        </button>
+          <button
+            className="btn btn-success m-4 "
+            // style={{ margin: "20px auto" }}
+            type="submit"
+          >
+            Regresar
+          </button>
+        </Link>
+
         <div
           className="col-xs-10 col-md-8 col-sm-10 col-lg-8 mt-4 ml-auto mr-auto"
           style={allBg}
@@ -136,160 +167,25 @@ class createTeam extends Component {
                 Nombre del equipo
               </Label>
               <Input
-                // onChange={event => this.inputChange(event)}
+                onChange={event => this.inputChange(event)}
                 style={inputSty}
                 type="name"
-                name="nombreLiga"
+                name="nombre"
                 placeholder="Nombre"
                 className="col-6"
               />
             </FormGroup>
-            <div className="mt-4">
-              <h3 style={labelNameSty}>Nuevo Jugador</h3>
-              <hr></hr>
-            </div>
-
-            <div>
-              <div className="row col-12">
-                <div className="col-6">
-                  {" "}
-                  <Label style={labelSty} for="exampleName">
-                    Nombre
-                  </Label>
-                </div>
-                <div className="col-6">
-                  {" "}
-                  <Label style={labelSty} for="exampleName">
-                    Apellido
-                  </Label>
-                </div>
-              </div>
-              <FormGroup className="col-12 row justify-content-start">
-                <Input
-                  // onChange={event => this.inputChangeB(event)}
-                  style={inputSty}
-                  type="name"
-                  name="nombre"
-                  placeholder="Nombre"
-                  className="col-6"
-                />
-                <Input
-                  // onChange={event => this.inputChangeB(event)}
-                  style={inputSty}
-                  type="name"
-                  name="apellido"
-                  placeholder="Apellido"
-                  className="col-6"
-                />
-              </FormGroup>
-            </div>
-            <div>
-              <div className="row col-12">
-                <div className="col-6">
-                  {" "}
-                  <Label style={labelSty} for="exampleName">
-                    Posicion
-                  </Label>
-                </div>
-                <div className="col-6">
-                  {" "}
-                  <Label style={labelSty} for="exampleName">
-                    Numero
-                  </Label>
-                </div>
-              </div>
-              <FormGroup className="col-12 row justify-content-start">
-                <Input
-                  // onChange={event => this.inputChangeB(event)}
-                  style={inputSty}
-                  type="name"
-                  name="posicion"
-                  placeholder="Posicion"
-                  className="col-6"
-                />
-                <Input
-                  // onChange={event => this.inputChangeB(event)}
-                  style={inputSty}
-                  type="number"
-                  name="dorsal"
-                  placeholder="Numero"
-                  className="col-6"
-                />
-              </FormGroup>
-            </div>
-            <div className="row col-12">
-              <div className="col-6">
-                {" "}
-                <Label style={labelSty} for="exampleName">
-                  Telefono
-                </Label>
-              </div>
-              <div className="col-6">
-                {" "}
-                <Label style={labelSty} for="exampleName">
-                  Cedula
-                </Label>
-              </div>
-            </div>
-            <FormGroup className="col-12 row justify-content-start">
-              <Input
-                // onChange={event => this.inputChangeB(event)}
-                style={inputSty}
-                type="number"
-                name="telefono"
-                placeholder="Telefono"
-                className="col-6"
-              />
-              <Input
-                // onChange={event => this.inputChangeB(event)}
-                style={inputSty}
-                type="name"
-                name="cedula"
-                placeholder="No. de cedula"
-                className="col-6"
-              />
-            </FormGroup>
-            <div className="row col-12">
-              <div className="col-6">
-                {" "}
-                <Label style={labelSty} for="exampleName">
-                  Fecha de Nacimiento
-                </Label>
-              </div>
-              <div className="col-6">
-                {" "}
-                <Label style={labelSty} for="exampleName">
-                  Edad
-                </Label>
-              </div>
-            </div>
-            <FormGroup className="col-12 row justify-content-start">
-              <Input
-                // onChange={event => this.calculateAge(event)}
-                style={inputSty}
-                type="date"
-                name="FechaNac"
-                id="exampleFechaNac"
-                placeholder="Fecha de nacimiento"
-                className="col-6"
-              />
-              <Input
-                // onChange={event => this.inputChangeB(event)}
-                style={inputSty}
-                type="name"
-                name="direccion"
-                placeholder="Edad"
-                className="col-6"
-              />
-            </FormGroup>
-
-            <FormGroup check>
-              <Label style={labelSty} check>
-                <Input type="checkbox" />
-                Check me out
-              </Label>
-            </FormGroup>
-            <Button onClick={this.sendFormData}>Submit</Button>
+            <BasicForm
+              title={"Director"}
+              directorN={this.state.directorN}
+              directorA={this.state.directorA}
+              directorE={this.state.directorE}
+              directorT={this.state.directorT}
+              directorD={this.state.directorD}
+              directorC={this.state.directorC}
+              handleStateChange={this.inputChange}
+            ></BasicForm>
+            <CreatePlayer />
           </Form>
           <h3>{this.state.id}</h3>
           <h4>{this.state.contacto}</h4>
