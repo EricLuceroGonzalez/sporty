@@ -135,7 +135,7 @@ class CreatePlayer extends Component {
 
   sendFormData = () => {
     api
-      .postEquipo(this.state)
+      .postPlayer(this.state)
       .then(res => {
         console.log(this.state);
         console.log(res);
