@@ -63,15 +63,16 @@ class BasicForm extends Component {
     super(props);
     console.dir(props);
     this.state = {
-      id: "",
       title: this.props.title,
       directorN: this.props.directorN,
       inputChange: this.props.handleStateChange,
-      directorA: "",
-      directorC: "",
-      directorE: "",
-      directorT: "",
-      directorD: "",
+      calculateAge: this.props.calculateAge,
+      nombre: "",
+      apellido: "",
+      cedula: "",
+      edad: this.props.edad,
+      telefono: "",
+      direccion: ""
     };
   }
 
@@ -103,15 +104,15 @@ class BasicForm extends Component {
               onChange={event => this.state.inputChange(event)}
               style={inputSty}
               type="name"
-              name="directorN"
+              name="nombre"
               placeholder="Nombre"
               className="col-6"
             />
             <Input
-            onChange={event => this.state.inputChange(event)}
+              onChange={event => this.state.inputChange(event)}
               style={inputSty}
               type="name"
-              name="directorA"
+              name="apellido"
               placeholder="Apellido"
               className="col-6"
             />
@@ -133,18 +134,18 @@ class BasicForm extends Component {
         </div>
         <FormGroup className="col-12 row justify-content-start">
           <Input
-          onChange={event => this.state.inputChange(event)}
+            onChange={event => this.state.inputChange(event)}
             style={inputSty}
             type="number"
-            name="directorT"
+            name="telefono"
             placeholder="Telefono"
             className="col-6"
           />
           <Input
-          onChange={event => this.state.inputChange(event)}
+            onChange={event => this.state.inputChange(event)}
             style={inputSty}
             type="number"
-            name="directorC"
+            name="cedula"
             placeholder="No. de cedula"
             className="col-6"
           />
@@ -165,22 +166,27 @@ class BasicForm extends Component {
         </div>
         <FormGroup className="col-12 row justify-content-start">
           <Input
-        //   onChange={event => this.state.inputChange(event)}
+            onChange={event => this.state.calculateAge(event)}
             style={inputSty}
             type="date"
             name="FechaNac"
             id="exampleFechaNac"
             placeholder="Fecha de nacimiento"
+            min="1940-01-01"
+            max="2019-12-31"
             className="col-6"
           />
-          <Input
-          onChange={event => this.state.inputChange(event)}
+          {/*
+            <Input
+            onChange={event => this.state.inputChange(event)}
             style={inputSty}
             type="name"
-            name="directorE"
+            name="edad"
             placeholder="Edad"
             className="col-6"
-          />
+          ></Input>
+*/}
+          <h3 className="col-6">{this.state.edad}</h3>
         </FormGroup>
 
         <FormGroup check>

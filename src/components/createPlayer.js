@@ -63,42 +63,101 @@ class CreatePlayer extends Component {
     super(props);
     console.dir(props);
     this.state = {
-      id: "",
-      deporte: "",
+      ligaId: this.props.ligaId,
       nombre: "",
-      descripcion: "",
-      organizador: "",
-      contacto: "",
-      icono: "",
-      dorsales: ["1", "2", "3",'4', '5', '6', '7'],
-      posicion: ['portero', 'defensa', 'mediocampo', 'delantero']
+      apellido: "",
+      cedula: "",
+      edad: "",
+      telefono: "",
+      numero: '',
+      posicion: ''
     };
   }
+
+  inputChange = e => {
+    e.preventDefault();
+    const name = e.target.attributes.name.value;
+    const value = e.target.value;
+    console.log(e.target);
+
+    console.log(name);
+    console.log(value);
+    this.setState({ [name]: value });
+
+    console.log(this.state);
+  };
+
+  selectChange = e => {
+    e.preventDefault();
+    const name = e.target.attributes.name.value;
+    const value = e.target.value;
+    console.log(`value: ${value}`);
+    console.log(`name: ${name}`);
+
+    // this.setState({ fechaCreada: this.getCurrentDate() });
+    // this.state.sportsList.filter(item => {
+      // item.nombre === value
+      this.setState({ [name]: value });
+        // : console.log("ni verga");
+    // });
+  };
+
   renderDorsales = () => {
-    const listDorsales = this.state.dorsales.map((item, key) => {
+    const listDorsales = ["1", "2", "3", "4", "5", "6", "7"]
+    const dorsales = listDorsales.map((item, key) => {
       return (
-        <option name="deporte" key={key}>
+        <option
+          name="numero"
+          key={key}
+          onClick={event => this.selectChange(event)}
+        >
           {item}
         </option>
       );
     });
-    return listDorsales;
+    return dorsales;
   };
   renderPosicion = () => {
-    const listPosicion = this.state.posicion.map((item, key) => {
+    const listPosicion = ["portero", "defensa", "mediocampo", "delantero"];
+    const posicion = listPosicion.map((item, key) => {
       return (
-        <option name="deporte" key={key}>
+        <option
+          name="posicion"
+          key={key}
+          onClick={event => this.selectChange(event)}
+        >
           {item}
         </option>
       );
     });
-    return listPosicion;
+    return posicion;
+  };
+
+  sendFormData = () => {
+    api
+      .postEquipo(this.state)
+      .then(res => {
+        console.log(this.state);
+        console.log(res);
+
+        console.log({
+          mensaje: "Post exitoso",
+          response: res.data
+        });
+      })
+      .catch(err => {
+        console.log(this.state);
+        console.log({
+          mensaje: "Post Fallido",
+          response: err
+        });
+      });
   };
 
   render() {
     return (
       <React.Fragment>
-        <div className="mt-4">
+        <div className="mt-2">
           <h3 style={labelNameSty}>Nuevo Jugador</h3>
           <hr></hr>
         </div>
@@ -120,7 +179,7 @@ class CreatePlayer extends Component {
           </div>
           <FormGroup className="col-12 row justify-content-start">
             <Input
-              // onChange={event => this.inputChangeB(event)}
+              onChange={event => this.inputChange(event)}
               style={inputSty}
               type="name"
               name="nombre"
@@ -128,7 +187,7 @@ class CreatePlayer extends Component {
               className="col-6"
             />
             <Input
-              // onChange={event => this.inputChangeB(event)}
+              onChange={event => this.inputChange(event)}
               style={inputSty}
               type="name"
               name="apellido"
@@ -154,25 +213,21 @@ class CreatePlayer extends Component {
           </div>
           <FormGroup className="col-12 row justify-content-start">
             <Input
-              // onChange={event => this.inputChangeB(event)}
+              // onChange={event => this.inputChange(event)}
               style={inputSty}
               type="select"
-              name="posicion"
+              // name="posicion"
               placeholder="Posicion"
               className="col-6"
             >
-            {this.renderPosicion()}
+              {this.renderPosicion()}
             </Input>
-            {/**<Input
-              // onChange={event => this.inputChangeB(event)}
-            //   style={inputSty}
-            //   type="number"
-            //   name="dorsal"
-            //   placeholder="Numero"
-            //   className="col-6" */}
-            <Input type="select" id="exampleSelect"
-            style={inputSty}
-            className='col-6'>
+            <Input
+              type="select"
+              id="exampleSelect"
+              style={inputSty}
+              className="col-6"
+            >
               {this.renderDorsales()}
             </Input>
           </FormGroup>
@@ -193,7 +248,7 @@ class CreatePlayer extends Component {
         </div>
         <FormGroup className="col-12 row justify-content-start">
           <Input
-            // onChange={event => this.inputChangeB(event)}
+            onChange={event => this.inputChange(event)}
             style={inputSty}
             type="number"
             name="telefono"
@@ -201,7 +256,7 @@ class CreatePlayer extends Component {
             className="col-6"
           />
           <Input
-            // onChange={event => this.inputChangeB(event)}
+            onChange={event => this.inputChange(event)}
             style={inputSty}
             type="number"
             name="cedula"
@@ -225,7 +280,7 @@ class CreatePlayer extends Component {
         </div>
         <FormGroup className="col-12 row justify-content-start">
           <Input
-            // onChange={event => this.calculateAge(event)}
+            onChange={event => this.inputChange(event)}
             style={inputSty}
             type="date"
             name="FechaNac"
@@ -234,21 +289,15 @@ class CreatePlayer extends Component {
             className="col-6"
           />
           <Input
-            // onChange={event => this.inputChangeB(event)}
+            onChange={event => this.inputChange(event)}
             style={inputSty}
             type="name"
-            name="direccion"
+            name="edad"
             placeholder="Edad"
             className="col-6"
           />
         </FormGroup>
 
-        <FormGroup check>
-          <Label style={labelSty} check>
-            <Input type="checkbox" />
-            Check me out
-          </Label>
-        </FormGroup>
         <Button onClick={this.sendFormData}>Submit</Button>
       </React.Fragment>
     );

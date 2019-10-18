@@ -84,13 +84,16 @@ class createTeam extends Component {
     this.state = {
       ligaId: props.match.params.id,
       nombre: "",
-      directorN: "",
-      directorA: "",
-      directorC: "",
-      directorE: "",
-      directorT: "",
-      directorD: "",
-      jugador: "",
+      director: {
+        nombre: "",
+        apellido: "",
+        cedula: "",
+        edad: "",
+        bday: "",
+        telefono: "",
+        direccion: ""
+      },
+      jugador: [],
       icono: ""
     };
   }
@@ -131,6 +134,36 @@ class createTeam extends Component {
     this.setState({ [name]: value });
 
     console.log(this.state);
+  };
+
+  inputChangeB = e => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name);
+    console.log(value);
+
+    this.setState(prevState => {
+      let director = Object.assign({}, prevState.director); // creating copy of state variable director
+      director[name] = value; // update the name property, assign a new value
+      return { director }; // return new object director object
+    });
+    console.log(this.state);
+  };
+
+  calculateAge = e => {
+    const bdayms = new Date(e.target.valueAsNumber);
+    const bdayTz = bdayms.getTime() + bdayms.getTimezoneOffset() * 60 * 1000;
+
+    var diff_ms = Date.now() - bdayTz;
+    var age_dt = new Date(diff_ms);
+    const edadInput = Math.abs(age_dt.getUTCFullYear() - 1970);
+
+    this.setState(prevState => {
+      let director = Object.assign({}, prevState.director); // creating copy of state variable director
+      director["edad"] = edadInput; // update the name property, assign a new value
+      return { director }; // return new object director object
+    });
   };
 
   render() {
@@ -177,15 +210,21 @@ class createTeam extends Component {
             </FormGroup>
             <BasicForm
               title={"Director"}
-              directorN={this.state.directorN}
-              directorA={this.state.directorA}
-              directorE={this.state.directorE}
-              directorT={this.state.directorT}
-              directorD={this.state.directorD}
-              directorC={this.state.directorC}
-              handleStateChange={this.inputChange}
+              nombre={this.state.director.nombre}
+              apellido={this.state.director.apellido}
+              cedula={this.state.director.cedula}
+              edad={this.state.director.edad}
+              bday={this.state.director.bday}
+              telefono={this.state.director.telefono}
+              direccion={this.state.director.direccion}
+              handleStateChange={this.inputChangeB}
+              calculateAge={this.calculateAge}
             ></BasicForm>
-            <CreatePlayer />
+            <hr></hr>
+            <hr></hr>
+            <hr></hr>
+            <CreatePlayer 
+            ligaId= {this.state.ligaId}></CreatePlayer>
           </Form>
           <h3>{this.state.id}</h3>
           <h4>{this.state.contacto}</h4>
