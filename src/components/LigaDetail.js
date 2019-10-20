@@ -61,6 +61,8 @@ class LigaDetail extends Component {
           response: err
         });
       });
+
+      
   }
   render() {
     return (
