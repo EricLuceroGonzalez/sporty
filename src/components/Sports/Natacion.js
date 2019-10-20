@@ -6,8 +6,9 @@ import LigasList from "../LigasList";
 import { faSwimmer } from "@fortawesome/free-solid-svg-icons";
 
 const standardBg = {
-  background: 'rgb(27,96,242)',
-  background: 'linear-gradient(90deg, rgba(27,96,242,1) 0%, rgba(145,200,255,0.5) 100%)',
+  // background: 'rgb(27,96,242)',
+  background:
+    "linear-gradient(90deg, rgba(27,96,242,1) 0%, rgba(145,200,255,0.5) 100%)",
   border: "1px solid gray",
   padding: "70px 50px",
   margin: "30px auto"
@@ -26,7 +27,7 @@ class Natacion extends Component {
           mensaje: "Get exitoso",
           response: res.data
         });
-        res.data.res.filter((item, i) => {
+        return res.data.res.filter((item, i) => {
           item.deporte.nombre === "Natacion"
             ? this.setState(prevState => ({
                 ligas: [...prevState.ligas, item]
@@ -58,14 +59,14 @@ class Natacion extends Component {
 
     const listLigas = this.state.ligas.map((item, i) => {
       return (
-          <LigasList
+        <LigasList
           key={i}
           id={item._id}
-            deporte={item.deporte.nombre}
-            nombre={item.nombreLiga}
-            descripcion={item.descripcion}
-            icono={faSwimmer}
-          ></LigasList>
+          deporte={item.deporte.nombre}
+          nombre={item.nombreLiga}
+          descripcion={item.descripcion}
+          icono={faSwimmer}
+        ></LigasList>
       );
     });
     return listLigas;
@@ -74,7 +75,10 @@ class Natacion extends Component {
   render() {
     return (
       <React.Fragment>
-      <div className="container col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-6" style={standardBg}>
+        <div
+          className="container col-lg-10 col-md-10 col-sm-10 col-xs-12 mt-6"
+          style={standardBg}
+        >
           <h2>Natacion</h2>
           <div className="row">{this.renderLigas()}</div>
         </div>

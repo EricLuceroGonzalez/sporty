@@ -6,7 +6,7 @@ import LigasList from "../LigasList";
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 
 const standardBg = {
-  background: 'rgb(27,96,242)',
+  // background: 'rgb(27,96,242)',
   background: 'linear-gradient(90deg, rgba(27,96,242,1) 0%, rgba(145,200,255,0.5) 100%)',
   border: "1px solid gray",
   padding: "70px 50px",
@@ -26,13 +26,15 @@ class Futsal extends Component {
           mensaje: "Get exitoso",
           response: res.data
         });
-        res.data.res.filter((item, i) => {
-          item.deporte.nombre === "Futsal"
-            ? this.setState(prevState => ({
-                ligas: [...prevState.ligas, item]
-              }))
-            : console.log("fuck");
-        });
+        return (
+          res.data.res.filter((item, i) => {
+            item.deporte.nombre === "Futsal"
+              ? this.setState(prevState => ({
+                  ligas: [...prevState.ligas, item]
+                }))
+              : console.log("fuck");
+          })
+        )
       })
       .catch(err => {
         console.log({

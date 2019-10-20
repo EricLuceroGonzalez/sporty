@@ -63,7 +63,7 @@ class CreatePlayer extends Component {
     super(props);
     console.dir(props);
     this.state = {
-      ligaId: this.props.ligaId,
+      equipoId: this.props.ligaId,
       nombre: "",
       apellido: "",
       cedula: "",

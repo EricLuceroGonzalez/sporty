@@ -1,28 +1,20 @@
 import React, { Component } from "react";
-import api from "../api/index";
-import { Link } from "react-router-dom";
+// import api from "../api/index";
+// import { Link } from "react-router-dom";
 import "./someStyle.css";
 import {
-  Container,
-  ButtonGroup,
+  // Container,
+  // ButtonGroup,
   Button,
-  Form,
+  // Form,
   FormGroup,
   Label,
   Input
 } from "reactstrap";
 
-const allBg = {
-  margin: "12px auto",
-  boxShadow: "4px 3px 6px black",
-  backgroundColor: "rgba(202,202,202,1)",
-  padding: "10px 20px",
-  fontSize: "10px"
-};
 const inputSty = {
   outline: "none",
   display: "block",
-  padding: "0px 25px",
   background: "rgba(1,1,1, 0.1)",
   width: "100%",
   border: "0",
@@ -34,7 +26,7 @@ const inputSty = {
   fontWeight: "500",
   lineHeight: "inherit",
   transition: "0.3s ease"
-};
+};  
 
 const labelSty = {
   display: "block",

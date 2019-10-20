@@ -6,7 +6,7 @@ import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const standardBg = {
-  background: 'rgb(27,96,242)',
+  // background: 'rgb(27,96,242)',
   background: 'linear-gradient(90deg, rgba(27,96,242,1) 0%, rgba(145,200,255,0.5) 100%)',
   border: "1px solid gray",
   padding: "70px 50px",
