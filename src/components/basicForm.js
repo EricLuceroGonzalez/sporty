@@ -59,6 +59,7 @@ class BasicForm extends Component {
       directorN: this.props.directorN,
       inputChange: this.props.handleStateChange,
       calculateAge: this.props.calculateAge,
+      sendTeamData: this.props.sendTeamData,
       nombre: "",
       apellido: "",
       cedula: "",
@@ -187,7 +188,7 @@ class BasicForm extends Component {
             Check me out
           </Label>
         </FormGroup>
-        <Button onClick={this.sendFormData}>Submit</Button>
+        <Button onClick={this.state.sendTeamData}>Submit</Button>
       </React.Fragment>
     );
   }

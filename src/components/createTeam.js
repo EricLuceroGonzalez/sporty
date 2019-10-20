@@ -82,7 +82,7 @@ class createTeam extends Component {
     super(props);
     console.dir(props);
     this.state = {
-      ligaId: props.match.params.id,
+      id: props.match.params.id,
       nombre: "",
       director: {
         nombre: "",
@@ -166,6 +166,26 @@ class createTeam extends Component {
     });
   };
 
+  sendTeamData = () => {
+    api
+    .postEquipo(this.state)
+    .then(res => {
+      console.log(this.state);
+      console.log(res);
+
+      console.log({
+        mensaje: "Post exitoso",
+        response: res.data
+      });
+    })
+    .catch(err => {
+      console.log({
+        mensaje: "Post Fallido",
+        response: err
+      });
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -219,12 +239,14 @@ class createTeam extends Component {
               direccion={this.state.director.direccion}
               handleStateChange={this.inputChangeB}
               calculateAge={this.calculateAge}
+              sendTeamData={this.sendTeamData}
             ></BasicForm>
             <hr></hr>
             <hr></hr>
             <hr></hr>
-            <CreatePlayer 
+{/**            <CreatePlayer 
             ligaId= {this.state.ligaId}></CreatePlayer>
+ */}
           </Form>
           <h3>{this.state.id}</h3>
           <h4>{this.state.contacto}</h4>
