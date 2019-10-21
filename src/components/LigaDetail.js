@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../api/index";
+import { Spinner } from "reactstrap";
 import {
   Card,
   CardHeader,
@@ -9,6 +10,7 @@ import {
   CardSubtitle
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import TeamsList from "./teamList";
 
 const titleCard = {
   fontSize: "1.25em",
@@ -28,6 +30,7 @@ class LigaDetail extends Component {
     super(props);
     console.dir(props);
     this.state = {
+      ligaTeams: [],
       id: props.match.params.id,
       deporte: "",
       nombre: "",
@@ -57,13 +60,61 @@ class LigaDetail extends Component {
       })
       .catch(err => {
         console.log({
-          mensaje: "Error - LigaDetail",
+          mensaje: "Error - getEquipos",
           response: err
         });
       });
 
-      
+    api
+      .getEquipos()
+      .then(res => {
+        console.log({
+          mensaje: "Get exitoso! - getEquipos",
+          response: res
+        });
+        this.setState({
+          ligaTeams: res.data.filter(
+            leagueID => leagueID.ligaId == this.state.id
+          )
+        });
+      })
+      .catch(err => {
+        console.log({
+          mensaje: "Error - getEquipos",
+          response: err
+        });
+      });
   }
+  clicked = () => {
+    console.log("here");
+    console.log(this.state);
+  };
+  renderEquipos = () => {
+    if (this.state.ligaTeams.length === 0) {
+      return (
+        <div className="justify-content-center">
+          <Spinner type="grow" color="light" />
+          <Spinner type="grow" color="dark" />
+          <Spinner type="grow" color="light" />
+          <Spinner type="grow" color="dark" />
+        </div>
+      );
+    } else {
+      console.log(this.state);
+
+      const listLigas = this.state.ligaTeams.map((item, i) => {
+        return (
+          <TeamsList
+            key={i}
+            nombre={item.nombre}
+            director={item.director}
+            capitan={item.capitan}
+          ></TeamsList>
+        );
+      });
+      return listLigas;
+    }
+  };
   render() {
     return (
       <div>
@@ -135,16 +186,10 @@ class LigaDetail extends Component {
                 </Link>
               </div>
             </CardHeader>
-            <CardBody>
-              <CardTitle style={titleCard}>CardTitle</CardTitle>
-              <CardSubtitle>CardSubTitle</CardSubtitle>
-              <CardText>
-                <span style={{ fontWeight: "bold" }}>Card: </span>
-                Text
-              </CardText>
-            </CardBody>
+            {this.renderEquipos()}
           </Card>
         </div>
+        <button onClick={this.clicked}>Click</button>
       </div>
     );
   }
