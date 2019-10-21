@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import api from "../api/index";
 import {
   Card,
   CardHeader,
@@ -7,6 +8,7 @@ import {
   CardTitle,
   CardSubtitle
 } from "reactstrap";
+import CreatePlayer from "./createPlayer";
 
 const titleCard = {
   fontSize: "1.25em",
@@ -15,27 +17,63 @@ const titleCard = {
 };
 
 const impact = {
-    color: "white",
-    fontWeight: "bolder",
-    fontSize: "1.25em",
-    padding: "5px 14px",
-    textShadow: "2px 2px 1px black"
-  };
+  color: "white",
+  fontWeight: "bolder",
+  fontSize: "1.25em",
+  padding: "5px 14px",
+  textShadow: "2px 2px 1px black"
+};
 
 class TeamsList extends Component {
   state = {
-    id: this.props.id,
+    equipoId: this.props.equipoId,
+    ligaId: this.props.ligaId,
     deporte: this.props.deporte,
     nombre: this.props.nombre,
     director: this.props.director,
     capitan: this.props.capitan,
-    players: this.props.players
+    players: [],
+    togglePayers: false
   };
 
   componentDidMount() {
-    console.log("111111");
-    console.log(this.state);
+    api
+      .getPlayers()
+      .then(res => {
+        console.log({
+          mensaje: "Get exitoso! - getJugadores",
+          response: res
+        });
+      })
+      .catch(err => {
+        console.log({
+          mensaje: "Error - getJugadores",
+          response: err
+        });
+      });
   }
+
+  createPlayerToggle = () => {
+    console.log("createPlayerToggle");
+
+    if (this.state.togglePayers) {
+      this.setState({ togglePayers: false });
+    } else {
+      this.setState({ togglePayers: true });
+    }
+  };
+  PlayerCreateMenu = () => {
+    if (this.state.togglePayers) {
+      return (
+        <CreatePlayer
+          ligaId={this.state.ligaId}
+          equipoId={this.state.equipoId}
+        ></CreatePlayer>
+      );
+    } else {
+      return "Fuck";
+    }
+  };
   render() {
     return (
       <div
@@ -51,16 +89,14 @@ class TeamsList extends Component {
         >
           <CardHeader>
             <div className="row" style={{ padding: "0px 20px" }}>
-              <div className="mr-auto" >
-                {this.state.nombre}
-              </div>
+              <div className="mr-auto">{this.state.nombre}</div>
               <button
-              className="btn btn-success my-2 my-sm-0"
-              style={impact}
-              type="submit"
-            >
-              Crear jugador
-            </button>
+                className="btn btn-success my-2 my-sm-0"
+                style={impact}
+                onClick={this.createPlayerToggle}
+              >
+                Crear jugador
+              </button>
             </div>
           </CardHeader>
           <CardBody>
@@ -82,6 +118,7 @@ class TeamsList extends Component {
               {this.state.players}
             </CardText>
           </CardBody>
+          {this.PlayerCreateMenu()}
         </Card>
       </div>
     );

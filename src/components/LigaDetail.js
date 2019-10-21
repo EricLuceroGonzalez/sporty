@@ -106,10 +106,12 @@ class LigaDetail extends Component {
         return (
           <TeamsList
             key={i}
+            equipoId={item._id}
+            ligaId={item.ligaId}
             nombre={item.nombre}
             director={item.director}
             capitan={item.capitan}
-            players={item.jugador}
+            // players={item.jugador}
           ></TeamsList>
         );
       });

@@ -11,6 +11,7 @@ export const postLigas = content => api.post("/liga", content);
 export const postEquipo = content => api.post("/equipo", content);
 export const getEquipos = () => api.get("/equipos");
 export const postPlayer = aPlayer => api.post("/player", aPlayer);
+export const getPlayers = () => api.get("/players");
 export const getLigaId = theId => api.get(`/ligaDetail/${theId}`);
 
 const apis = {
@@ -18,6 +19,7 @@ const apis = {
   getSports,
   getLigaId,
   getEquipos,
+  getPlayers,
   postLigas,
   postEquipo,
   postPlayer

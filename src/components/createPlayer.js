@@ -12,12 +12,20 @@ import {
   Input
 } from "reactstrap";
 
+const AllContainer = {
+  // border: '2px solid red',
+  backgroundColor:"rgba(252,252,252,0.5)",
+  fontSize: '12px',
+  // boxShadow: '3px 3px 2px gray',
+  margin: '8px auto',
+  padding: '6px 2px'
+}
 const allBg = {
   margin: "12px auto",
   boxShadow: "4px 3px 6px black",
   backgroundColor: "rgba(202,202,202,1)",
   padding: "10px 20px",
-  fontSize: "10px"
+  fontSize: "8px"
 };
 const inputSty = {
   outline: "none",
@@ -51,7 +59,7 @@ const labelNameSty = {
   display: "block",
   margin: "0 0 10px",
   color: "gray",
-  fontSize: "20px",
+  fontSize: "14px",
   fontWeight: "500",
   lineHeight: "1",
   textTransform: "uppercase",
@@ -63,7 +71,8 @@ class CreatePlayer extends Component {
     super(props);
     console.dir(props);
     this.state = {
-      equipoId: this.props.ligaId,
+      ligaId: this.props.ligaId,
+      equipoId: this.props.equipoId,
       nombre: "",
       apellido: "",
       cedula: "",
@@ -156,150 +165,154 @@ class CreatePlayer extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="mt-2">
-          <h3 style={labelNameSty}>Nuevo Jugador</h3>
-          <hr></hr>
-        </div>
 
-        <div>
-          <div className="row col-12">
-            <div className="col-6">
-              {" "}
-              <Label style={labelSty} for="exampleName">
-                Nombre
-              </Label>
-            </div>
-            <div className="col-6">
-              {" "}
-              <Label style={labelSty} for="exampleName">
-                Apellido
-              </Label>
-            </div>
-          </div>
-          <FormGroup className="col-12 row justify-content-start">
-            <Input
-              onChange={event => this.inputChange(event)}
-              style={inputSty}
-              type="name"
-              name="nombre"
-              placeholder="Nombre"
-              className="col-6"
-            />
-            <Input
-              onChange={event => this.inputChange(event)}
-              style={inputSty}
-              type="name"
-              name="apellido"
-              placeholder="Apellido"
-              className="col-6"
-            />
-          </FormGroup>
-        </div>
-        <div>
-          <div className="row col-12">
-            <div className="col-6">
-              {" "}
-              <Label style={labelSty} for="exampleName">
-                Posicion
-              </Label>
-            </div>
-            <div className="col-6">
-              {" "}
-              <Label style={labelSty} for="exampleName">
-                Numero
-              </Label>
-            </div>
-          </div>
-          <FormGroup className="col-12 row justify-content-start">
-            <Input
-              // onChange={event => this.inputChange(event)}
-              style={inputSty}
-              type="select"
-              // name="posicion"
-              placeholder="Posicion"
-              className="col-6"
-            >
-              {this.renderPosicion()}
-            </Input>
-            <Input
-              type="select"
-              id="exampleSelect"
-              style={inputSty}
-              className="col-6"
-            >
-              {this.renderDorsales()}
-            </Input>
-          </FormGroup>
-        </div>
-        <div className="row col-12">
-          <div className="col-6">
-            {" "}
-            <Label style={labelSty} for="exampleName">
-              Telefono
-            </Label>
-          </div>
-          <div className="col-6">
-            {" "}
-            <Label style={labelSty} for="exampleName">
-              Cedula
-            </Label>
-          </div>
-        </div>
-        <FormGroup className="col-12 row justify-content-start">
-          <Input
-            onChange={event => this.inputChange(event)}
-            style={inputSty}
-            type="number"
-            name="telefono"
-            placeholder="Telefono"
-            className="col-6"
-          />
-          <Input
-            onChange={event => this.inputChange(event)}
-            style={inputSty}
-            type="number"
-            name="cedula"
-            placeholder="No. de cedula"
-            className="col-6"
-          />
-        </FormGroup>
-        <div className="row col-12">
-          <div className="col-6">
-            {" "}
-            <Label style={labelSty} for="exampleName">
-              Fecha de Nacimiento
-            </Label>
-          </div>
-          <div className="col-6">
-            {" "}
-            <Label style={labelSty} for="exampleName">
-              Edad
-            </Label>
-          </div>
-        </div>
-        <FormGroup className="col-12 row justify-content-start">
-          <Input
-            onChange={event => this.inputChange(event)}
-            style={inputSty}
-            type="date"
-            name="FechaNac"
-            id="exampleFechaNac"
-            placeholder="Fecha de nacimiento"
-            className="col-6"
-          />
-          <Input
-            onChange={event => this.inputChange(event)}
-            style={inputSty}
-            type="name"
-            name="edad"
-            placeholder="Edad"
-            className="col-6"
-          />
-        </FormGroup>
 
-        <Button onClick={this.sendFormData}>Submit</Button>
-      </React.Fragment>
+<Container 
+className='col-11'
+style={AllContainer}>
+<div className="mt-2">
+<h3 style={labelNameSty}>Nuevo Jugador</h3>
+<hr></hr>
+</div>
+
+<div>
+<div className="row col-12">
+  <div className="col-6">
+    {" "}
+    <Label style={labelSty} for="exampleName">
+      Nombre
+    </Label>
+  </div>
+  <div className="col-6">
+    {" "}
+    <Label style={labelSty} for="exampleName">
+      Apellido
+    </Label>
+  </div>
+</div>
+<FormGroup className="col-12 row justify-content-start">
+  <Input
+    onChange={event => this.inputChange(event)}
+    style={inputSty}
+    type="name"
+    name="nombre"
+    placeholder="Nombre"
+    className="col-6"
+  />
+  <Input
+    onChange={event => this.inputChange(event)}
+    style={inputSty}
+    type="name"
+    name="apellido"
+    placeholder="Apellido"
+    className="col-6"
+  />
+</FormGroup>
+</div>
+<div>
+<div className="row col-12">
+  <div className="col-6">
+    {" "}
+    <Label style={labelSty} for="exampleName">
+      Posicion
+    </Label>
+  </div>
+  <div className="col-6">
+    {" "}
+    <Label style={labelSty} for="exampleName">
+      Numero
+    </Label>
+  </div>
+</div>
+<FormGroup className="col-12 row justify-content-start">
+  <Input
+    // onChange={event => this.inputChange(event)}
+    style={inputSty}
+    type="select"
+    // name="posicion"
+    placeholder="Posicion"
+    className="col-6"
+  >
+    {this.renderPosicion()}
+  </Input>
+  <Input
+    type="select"
+    id="exampleSelect"
+    style={inputSty}
+    className="col-6"
+  >
+    {this.renderDorsales()}
+  </Input>
+</FormGroup>
+</div>
+<div className="row col-12">
+<div className="col-6">
+  {" "}
+  <Label style={labelSty} for="exampleName">
+    Telefono
+  </Label>
+</div>
+<div className="col-6">
+  {" "}
+  <Label style={labelSty} for="exampleName">
+    Cedula
+  </Label>
+</div>
+</div>
+<FormGroup className="col-12 row justify-content-start">
+<Input
+  onChange={event => this.inputChange(event)}
+  style={inputSty}
+  type="number"
+  name="telefono"
+  placeholder="Telefono"
+  className="col-6"
+/>
+<Input
+  onChange={event => this.inputChange(event)}
+  style={inputSty}
+  type="number"
+  name="cedula"
+  placeholder="No. de cedula"
+  className="col-6"
+/>
+</FormGroup>
+<div className="row col-12">
+<div className="col-6">
+  {" "}
+  <Label style={labelSty} for="exampleName">
+    Fecha de Nacimiento
+  </Label>
+</div>
+<div className="col-6">
+  {" "}
+  <Label style={labelSty} for="exampleName">
+    Edad
+  </Label>
+</div>
+</div>
+<FormGroup className="col-12 row justify-content-start">
+<Input
+  onChange={event => this.inputChange(event)}
+  style={inputSty}
+  type="date"
+  name="FechaNac"
+  id="exampleFechaNac"
+  placeholder="Fecha de nacimiento"
+  className="col-6"
+/>
+<Input
+  onChange={event => this.inputChange(event)}
+  style={inputSty}
+  type="name"
+  name="edad"
+  placeholder="Edad"
+  className="col-6"
+/>
+</FormGroup>
+
+<Button onClick={this.sendFormData}>Submit</Button>
+</Container>
     );
   }
 }
