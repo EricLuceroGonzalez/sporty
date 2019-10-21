@@ -14,13 +14,22 @@ const titleCard = {
   borderBottom: "2px solid gray"
 };
 
+const impact = {
+    color: "white",
+    fontWeight: "bolder",
+    fontSize: "1.25em",
+    padding: "5px 14px",
+    textShadow: "2px 2px 1px black"
+  };
+
 class TeamsList extends Component {
   state = {
     id: this.props.id,
     deporte: this.props.deporte,
     nombre: this.props.nombre,
     director: this.props.director,
-    capitan: this.props.capitan
+    capitan: this.props.capitan,
+    players: this.props.players
   };
 
   componentDidMount() {
@@ -30,7 +39,7 @@ class TeamsList extends Component {
   render() {
     return (
       <div
-        className="col-xs-8 col-md-8 col-sm-8 col-lg-8"
+        className="col-xs-10 col-md-10 col-sm-10 col-lg-10"
         style={{ fontSize: "10px" }}
       >
         <Card
@@ -45,6 +54,13 @@ class TeamsList extends Component {
               <div className="mr-auto" >
                 {this.state.nombre}
               </div>
+              <button
+              className="btn btn-success my-2 my-sm-0"
+              style={impact}
+              type="submit"
+            >
+              Crear jugador
+            </button>
             </div>
           </CardHeader>
           <CardBody>
@@ -62,8 +78,8 @@ class TeamsList extends Component {
               {this.state.capitan}
             </CardText>
             <CardText>
-              <span style={{ fontWeight: "bold" }}>Id </span>
-              {this.state.id}
+              <span style={{ fontWeight: "bold" }}>Jugadores: </span>
+              {this.state.players}
             </CardText>
           </CardBody>
         </Card>

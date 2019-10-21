@@ -55,6 +55,7 @@ class BasicForm extends Component {
     super(props);
     console.dir(props);
     this.state = {
+      ligaId: this.props.id,
       title: this.props.title,
       directorN: this.props.directorN,
       inputChange: this.props.handleStateChange,

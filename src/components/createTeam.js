@@ -83,6 +83,7 @@ class createTeam extends Component {
     console.dir(props);
     this.state = {
       id: props.match.params.id,
+      ligaId: props.match.params.id,
       nombre: "",
       director: {
         nombre: "",
@@ -230,6 +231,7 @@ class createTeam extends Component {
             </FormGroup>
             <BasicForm
               title={"Director"}
+              ligaId={this.state.id}
               nombre={this.state.director.nombre}
               apellido={this.state.director.apellido}
               cedula={this.state.director.cedula}

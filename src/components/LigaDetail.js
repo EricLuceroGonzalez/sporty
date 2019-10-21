@@ -109,6 +109,7 @@ class LigaDetail extends Component {
             nombre={item.nombre}
             director={item.director}
             capitan={item.capitan}
+            players={item.jugador}
           ></TeamsList>
         );
       });
