@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import api from "../api/index";
+import { Spinner } from "reactstrap";
 import {
   Card,
   CardHeader,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle
+  CardSubtitle,
+  Table
 } from "reactstrap";
 import CreatePlayer from "./createPlayer";
+import PlayersList from "./PlayersList";
 
 const titleCard = {
   fontSize: "1.25em",
@@ -42,7 +45,13 @@ class TeamsList extends Component {
       .then(res => {
         console.log({
           mensaje: "Get exitoso! - getJugadores",
-          response: res
+          response: res.data
+        });
+        this.setState({
+          players: res.data.filter(
+            itemId => itemId.equipoId === this.state.equipoId
+          )
+          //   res.data.filter(itemId => itemId == this.state.equipoId)
         });
       })
       .catch(err => {
@@ -55,6 +64,7 @@ class TeamsList extends Component {
 
   createPlayerToggle = () => {
     console.log("createPlayerToggle");
+    console.log(this.state.players);
 
     if (this.state.togglePayers) {
       this.setState({ togglePayers: false });
@@ -74,6 +84,22 @@ class TeamsList extends Component {
       return "Fuck";
     }
   };
+
+  renderPlayers = () => {
+    console.log("render fucking playaaa");
+
+    if (this.state.players.length === 0) {
+      return (
+        <div className="justify-content-center">
+          <Spinner type="grow" color="light" />
+          <Spinner type="grow" color="dark" />
+        </div>
+      );
+    } else {
+      return <PlayersList players={this.state.players}></PlayersList>;
+    }
+  };
+
   render() {
     return (
       <div
@@ -115,10 +141,10 @@ class TeamsList extends Component {
             </CardText>
             <CardText>
               <span style={{ fontWeight: "bold" }}>Jugadores: </span>
-              {this.state.players}
             </CardText>
           </CardBody>
           {this.PlayerCreateMenu()}
+          {this.renderPlayers()}
         </Card>
       </div>
     );
